@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { CHAR_LIST, CHARS, SLOT_UNLOCK } from '../data/characters';
 import { ELEM_LABEL, MAX_GEAR_LEVEL, PASSIVE_TEXT, SLOT_ICON, SLOT_LABEL, sellValue, upgradeGearCost, type Equip } from '../data/equipment';
 import { RARITY_COLOR, RARITY_LABEL, SLOTS, type Slot } from '../engine/types';
-import { equipItem, equippedItems, sellGear, statsFor, toast, unequipSlot, upgradeGear, useGame } from '../game/store';
+import { autoEquip, equipItem, equippedItems, sellGear, statsFor, toast, unequipSlot, upgradeGear, useGame } from '../game/store';
 import { Btn, DEFAULT_STATS } from './common';
 import { Portrait } from './art';
 import { ScreenFrame } from './Frame';
@@ -39,6 +39,9 @@ export function EquipmentScreen() {
             ))}
           </div>
           <h3>{CHARS[cid].name} <small>Lv.{cs.level}</small></h3>
+          <div className="row" style={{ margin: '4px 0 10px' }}>
+            <Btn kind="gold" onClick={() => toast(autoEquip(cid))}>⚡ Auto-Equip Best</Btn>
+          </div>
           <div className="slots">
             {SLOTS.map((sl) => {
               const it = eq[sl]; const locked = cs.level < SLOT_UNLOCK[sl];

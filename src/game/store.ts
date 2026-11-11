@@ -165,6 +165,39 @@ export function upgradeCardLevel(id: string): string | null {
 }
 
 // ───────────── equipment ─────────────
+/** How good an item is for a given hero (role-weighted stats, upgrade level, elemental bonus, passive). */
+const GEAR_W: Record<string, { atk: number; mag: number; def: number; hp: number; crit: number }> = {
+  warrior: { atk: 1.6, mag: 0.4, def: 1, hp: 0.12, crit: 2 },
+  deathKnight: { atk: 1.4, mag: 0.3, def: 1.6, hp: 0.15, crit: 1.5 },
+  darkPriest: { atk: 0.4, mag: 2, def: 1, hp: 0.12, crit: 1.5 },
+  guitarist: { atk: 1.5, mag: 1.2, def: 0.8, hp: 0.1, crit: 2.5 },
+  berserker: { atk: 2, mag: 0.2, def: 0.4, hp: 0.1, crit: 3 },
+};
+export function gearScore(e: Equip, charId: string): number {
+  const w = GEAR_W[charId] ?? GEAR_W.warrior; const m = 1 + e.level * 0.12;
+  return (e.atk * w.atk + e.mag * w.mag + e.def * w.def + e.hp * w.hp + e.crit * w.crit + (e.elemPct ?? 0) * 0.6 + (e.passive ? 8 : 0)) * m;
+}
+/** Equip the best available item in every unlocked slot. Items worn by other heroes are left alone. */
+export function autoEquip(charId: string): string {
+  const s = state.save; const cs = s.chars[charId];
+  const takenByOthers = new Set<string>();
+  CHAR_LIST.forEach((c) => { if (c.id !== charId) Object.values(s.chars[c.id].equip).forEach((u) => { if (u) takenByOthers.add(u); }); });
+  const next: Record<string, string | null> = {};
+  let changed = 0;
+  (Object.keys(cs.equip) as Slot[]).forEach((slot) => {
+    if (cs.level < SLOT_UNLOCK[slot]) return;
+    const pool = s.inventory.filter((e) => e.slot === slot && !takenByOthers.has(e.uid));
+    const best = pool.sort((a, b) => gearScore(b, charId) - gearScore(a, charId))[0];
+    if (best && best.uid !== cs.equip[slot]) {
+      const cur = s.inventory.find((e) => e.uid === cs.equip[slot]);
+      if (!cur || gearScore(best, charId) > gearScore(cur, charId)) { next[slot] = best.uid; changed++; }
+    }
+  });
+  if (!changed) return 'You are already wearing the best available gear.';
+  set((d) => { Object.entries(next).forEach(([slot, uid]) => { d.save.chars[charId].equip[slot as Slot] = uid; }); });
+  return `Equipped ${changed} better item${changed > 1 ? 's' : ''}.`;
+}
+
 export function equipItem(charId: string, uid: string): string | null {
   const s = state.save; const it = s.inventory.find((e) => e.uid === uid);
   if (!it) return 'Item not found.';
