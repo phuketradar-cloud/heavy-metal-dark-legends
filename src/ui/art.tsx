@@ -104,7 +104,10 @@ export const NODE_IMG: Record<string, string> = {
   elite: 'icons/node_elite.webp',
   boss: 'icons/node_boss.webp',
   cleared: 'icons/node_cleared.webp',
+  lock: 'icons/lock.webp',
 };
+/** Optional painted region emblems for the world-map medallions (index = region id). null falls back to an emoji. */
+export const REGION_IMG: (string | null)[] = Array.from({ length: 7 }, (_, i) => `icons/region_${i}.webp`);
 export const TILE_RIM = ['#cfc8b8', '#ff6a4a', '#5ab4ff', '#c488ff', '#5aeb8a', '#ffd04a'];
 
 export function Icon({ id, size = 24, style }: { id: string; size?: number; style?: CSSProperties }) {

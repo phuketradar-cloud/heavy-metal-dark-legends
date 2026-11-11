@@ -4,7 +4,7 @@ import { BOSSES, ENEMIES } from '../data/enemies';
 import { NODE_ICON, NODE_LABEL, REGIONS, nodeLevel } from '../data/world';
 import { audio } from '../engine/audio';
 import { battleCtxFor, regionUnlocked, startNode, useGame } from '../game/store';
-import { Embers, NODE_IMG, Portrait } from './art';
+import { Embers, NODE_IMG, Portrait, REGION_IMG } from './art';
 import { ScreenFrame } from './Frame';
 import { Btn } from './common';
 
@@ -30,7 +30,13 @@ export function WorldMap() {
             <button key={rg.id} className={`rpin ${sel === i ? 'sel' : ''} ${u ? '' : 'locked'} ${done ? 'done' : ''}`}
               style={{ left: POS[i][0] - 42, top: POS[i][1] - 42, ['--moon' as string]: rg.moon }}
               onClick={() => { audio.sfx('ui2'); setSel(i); }} title={rg.name}>
-              <span className="rpin-ico">{done ? '✔' : u ? PIN_ICO[i] : '🔒'}</span>
+              {REGION_IMG[i]
+                ? <>
+                    <img className="rpin-img" src={`${import.meta.env.BASE_URL}${REGION_IMG[i]}`} alt="" draggable={false} />
+                    {done && <img className="rpin-done" src={`${import.meta.env.BASE_URL}${NODE_IMG.cleared}`} alt="" draggable={false} />}
+                    {!u && <img className="rpin-lock" src={`${import.meta.env.BASE_URL}${NODE_IMG.lock}`} alt="" draggable={false} />}
+                  </>
+                : <span className="rpin-ico">{done ? '✔' : u ? PIN_ICO[i] : '🔒'}</span>}
               <b className="rpin-num">{i + 1}</b>
               <i className="rpin-prog">{Math.min(s.progress[i], rg.nodes.length)}/{rg.nodes.length}</i>
               <span className="rpin-name">{rg.name.replace('The ', '')}</span>

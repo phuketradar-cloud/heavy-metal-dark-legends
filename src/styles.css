@@ -345,3 +345,11 @@ input[type='range'] { accent-color: #c8182a; width: 220px; }
 }
 .region-panel.panel { padding: 26px 38px; }
 .pause.panel, .center-panel.panel { padding: 44px 52px; }
+
+/* painted region emblems inside the map medallions */
+.rpin-img { width: 58px; height: 58px; object-fit: contain; pointer-events: none; filter: drop-shadow(0 2px 3px #000a); }
+.rpin-done { position: absolute; top: -12px; right: -12px; width: 36px; height: 36px; object-fit: contain; pointer-events: none; filter: drop-shadow(0 2px 3px #000a); }
+.rpin-lock { position: absolute; bottom: -4px; left: -4px; font-size: 22px; filter: drop-shadow(0 2px 3px #000); }
+.rpin.locked .rpin-img { opacity: 0.6; }
+
+.rpin-lock { width: 34px; height: 34px; object-fit: contain; font-size: 0; filter: drop-shadow(0 2px 3px #000); pointer-events: none; }
