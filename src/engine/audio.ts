@@ -18,6 +18,16 @@ const STYLES: Record<MusicStyle, StyleDef> = {
     riff: [0, null, null, null, null, null, null, null, 3, null, null, null, 1, null, null, null], pad: [0, 7, 12] },
 };
 
+/** Recorded sound effects (public/audio/sfx). Several files under one id are played at random.
+ *  Ids without a file (or not decoded yet) fall back to the synthesized version below. */
+const SFX_FILES: Record<string, string[]> = {
+  ui: ['ui'], ui2: ['ui2'], swap: ['swap'], swapBad: ['swapBad'], match: ['match'], combo: ['combo'], shuffle: ['shuffle'],
+  explosion: ['explosion'], hit: ['hit'], crit: ['crit'], fire: ['fire'], lightning: ['lightning'], dark: ['dark'], ultimate: ['ultimate'],
+  card: ['card'], heal: ['heal'], shield: ['shield'], buff: ['buff'], dodge: ['dodge'], playerHit: ['playerHit'],
+  roar: ['roar_1', 'roar_2', 'roar_3', 'roar_4'], victory: ['victory'], defeat: ['defeat']
+};
+const NO_JITTER = new Set(['victory', 'defeat', 'ultimate', 'roar']); // everything else gets a tiny random pitch shift
+
 const mtof = (m: number) => 440 * Math.pow(2, (m - 69) / 12);
 
 class AudioEngine {
@@ -28,6 +38,7 @@ class AudioEngine {
   sfxOn = true; musicOn = true; sfxVol = 0.7; musicVol = 0.5;
   // optional recorded music file (replaces the synth loop while it plays)
   private fileEl: HTMLAudioElement | null = null; private fileUrl: string | null = null;
+  private sfxBufs = new Map<string, { buf: AudioBuffer; gain: number }[]>(); private sfxLoading = false;
 
   unlock() {
     if (this.fileEl && this.fileEl.paused && this.musicOn) void this.fileEl.play().catch(() => { /* still blocked */ });
@@ -47,6 +58,7 @@ class AudioEngine {
       const len = c.sampleRate * 1.5; this.noiseBuf = c.createBuffer(1, len, c.sampleRate);
       const d = this.noiseBuf.getChannelData(0); for (let i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
       this.apply();
+      void this.loadSfx();
       if (this.style && this.musicOn) this.startLoop();
     }
     if (this.ctx.state === 'suspended') void this.ctx.resume();
@@ -93,8 +105,34 @@ class AudioEngine {
   }
 
   // ───────── sfx ─────────
+  /** Fetch + decode every recorded effect once (peak-normalised so they all sit at a similar loudness). */
+  private async loadSfx() {
+    const c = this.ctx; if (!c || this.sfxLoading) return;
+    this.sfxLoading = true;
+    const base = import.meta.env.BASE_URL;
+    await Promise.allSettled(Object.entries(SFX_FILES).flatMap(([id, files]) => files.map(async (f) => {
+      const res = await fetch(`${base}audio/sfx/${f}.mp3`);
+      if (!res.ok) throw new Error(f);
+      const buf = await c.decodeAudioData(await res.arrayBuffer());
+      let peak = 0; const d = buf.getChannelData(0);
+      for (let i = 0; i < d.length; i += 8) peak = Math.max(peak, Math.abs(d[i]));
+      const list = this.sfxBufs.get(id) ?? []; list.push({ buf, gain: Math.min(2.5, 0.85 / Math.max(peak, 0.05)) }); this.sfxBufs.set(id, list);
+    })));
+  }
+  private playBuf(name: string): boolean {
+    const list = this.sfxBufs.get(name); const c = this.ctx;
+    if (!list?.length || !c) return false;
+    const { buf, gain } = list[Math.floor(Math.random() * list.length)];
+    const src = c.createBufferSource(); src.buffer = buf;
+    if (!NO_JITTER.has(name)) src.playbackRate.value = 0.96 + Math.random() * 0.08;
+    const g = c.createGain(); g.gain.value = gain;
+    src.connect(g); g.connect(this.sfxG); src.start();
+    return true;
+  }
+
   sfx(name: string) {
     if (!this.ctx || !this.sfxOn) return;
+    if (this.playBuf(name)) return;
     const T = this;
     switch (name) {
       case 'swap': T.tone(420, 0.06, 'triangle', 0.12, 1.4); break;
