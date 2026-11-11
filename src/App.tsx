@@ -9,6 +9,7 @@ import { EquipmentScreen } from './ui/Equipment';
 import { WorldMap } from './ui/MapScreen';
 import { BattleScreen } from './ui/BattleScreen';
 import { EventScreen, RewardScreen, TreasureScreen } from './ui/Reward';
+import { Tooltip } from './ui/Tooltip';
 
 export default function App() {
   const g = useGame();
@@ -37,6 +38,7 @@ export default function App() {
   return (
     <div className="viewport">
       <GlobalDefs />
+      <Tooltip />
       <div className="stage" style={{ transform: `translate(-50%, -50%) scale(${scale})` }}>
         {screen === 'menu' && <MainMenu />}
         {screen === 'character' && <CharacterScreen />}
