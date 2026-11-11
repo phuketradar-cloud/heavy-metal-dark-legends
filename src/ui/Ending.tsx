@@ -3,6 +3,9 @@ import { go, useGame } from '../game/store';
 import { Embers } from './art';
 import { Btn } from './common';
 
+/** Characters that have their own painted ending (others fall back to the Metal Warrior one). */
+const ENDING_IMG = new Set(['warrior', 'deathKnight', 'darkPriest', 'guitarist', 'berserker'].filter((id) => ['warrior', 'guitarist'].includes(id)));
+
 /** Shown after the final boss falls. */
 export function EndingScreen() {
   const g = useGame(); const s = g.save;
@@ -10,7 +13,7 @@ export function EndingScreen() {
   const stars = Object.values(s.stars).reduce((a, b) => a + b, 0);
   return (
     <div className="screen ending">
-      <div className="backdrop backdrop-img ending-bg" style={{ backgroundImage: `url(${import.meta.env.BASE_URL}bg/ending.webp)` }} />
+      <div className="backdrop backdrop-img ending-bg" style={{ backgroundImage: `url(${import.meta.env.BASE_URL}bg/ending-${ENDING_IMG.has(s.activeChar) ? s.activeChar : 'warrior'}.webp)` }} />
       <div className="ending-vignette" />
       <Embers n={22} />
       <div className="ending-text">
