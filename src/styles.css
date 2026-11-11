@@ -393,3 +393,9 @@ input[type='range'] { accent-color: #c8182a; width: 220px; }
 .gold .uico { width: 34px; height: 34px; }
 .mission-row .uico { width: 18px; height: 18px; vertical-align: middle; }
 .rw-stats .uico { width: 32px; height: 32px; }
+.slot-big .ico .uico { width: 42px; height: 42px; margin: 0; }
+.gear-head .ico .uico { width: 46px; height: 46px; margin: 0; }
+.gear-pip .uico { width: 22px; height: 22px; margin: 0; }
+.filters button .uico { width: 22px; height: 22px; }
+.drop > span .uico, .rw-stats + * .uico { width: 40px; height: 40px; }
+.slot .uico, .cs-slot .uico { width: 26px; height: 26px; }

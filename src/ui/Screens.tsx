@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { CHAR_LIST, CHARS, SLOT_UNLOCK, expToNext, MAX_LEVEL } from '../data/characters';
 import { REGIONS } from '../data/world';
 import { RARITY_COLOR, RARITY_LABEL, SLOTS } from '../engine/types';
-import { SLOT_ICON, SLOT_LABEL } from '../data/equipment';
+import { SLOT_LABEL } from '../data/equipment';
 import { audio } from '../engine/audio';
 import { continueGame, equippedItems, go, hasSave, newGame, selectChar, statsFor, updateSettings, useGame } from '../game/store';
 import { Backdrop, Embers, PlayerArt, Portrait, MonsterView } from './art';
@@ -135,7 +135,7 @@ export function CharacterScreen() {
               <div className="slot-mini">
                 {SLOTS.map((sl) => (
                   <div key={sl} className="slot" title={eq[sl] ? `${eq[sl]!.name}` : `${SLOT_LABEL[sl]} — unlocks at Lv.${SLOT_UNLOCK[sl]}`} style={{ borderColor: eq[sl] ? RARITY_COLOR[eq[sl]!.rarity] : '#444' }}>
-                    {SLOT_ICON[sl]}<small>{cs.level < SLOT_UNLOCK[sl] ? <><Ico n="lock" />{SLOT_UNLOCK[sl]}</> : eq[sl]?.name ?? '—'}</small>
+                    <Ico n={`slot_${sl}`} /><small>{cs.level < SLOT_UNLOCK[sl] ? <><Ico n="lock" />{SLOT_UNLOCK[sl]}</> : eq[sl]?.name ?? '—'}</small>
                   </div>
                 ))}
               </div>

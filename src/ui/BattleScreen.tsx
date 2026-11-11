@@ -7,7 +7,6 @@ import { CARDS } from '../data/cards';
 import { REGIONS } from '../data/world';
 import { BOSSES, ENEMIES, MOVES } from '../data/enemies';
 import { RARITY_COLOR, SLOTS, type Anim, type Fx } from '../engine/types';
-import { SLOT_ICON } from '../data/equipment';
 import {
   deckInstances, equippedItems, finishBattle, go, partyAssists, setAuto, statsFor, updateSettings, useGame,
 } from '../game/store';
@@ -222,7 +221,7 @@ export function BattleScreen() {
             {p.rage > 0 && <div className="status" title="Rage stacks"><span>😡</span><b>{p.rage}</b></div>}
           </div>
           <div className="hud-gear">
-            {SLOTS.map((s) => <span key={s} className="gear-pip" title={equip[s]?.name ?? `${s} (empty)`} style={{ borderColor: equip[s] ? RARITY_COLOR[equip[s]!.rarity] : '#333', opacity: equip[s] ? 1 : 0.4 }}>{SLOT_ICON[s]}</span>)}
+            {SLOTS.map((s) => <span key={s} className="gear-pip" title={equip[s]?.name ?? `${s} (empty)`} style={{ borderColor: equip[s] ? RARITY_COLOR[equip[s]!.rarity] : '#333', opacity: equip[s] ? 1 : 0.4 }}><Ico n={`slot_${s}`} /></span>)}
           </div>
         </div>
       </div>

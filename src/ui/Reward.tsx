@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { CARDS, MAX_CARD_LEVEL } from '../data/cards';
 import { CHARS } from '../data/characters';
-import { SLOT_ICON, SLOT_LABEL } from '../data/equipment';
+import { SLOT_LABEL } from '../data/equipment';
 import { REGIONS } from '../data/world';
 import { RARITY_COLOR, RARITY_LABEL } from '../engine/types';
 import {
@@ -51,7 +51,7 @@ export function RewardScreen() {
               <div className="rw-drops">
                 {r.drops.map((d) => (
                   <div key={d.uid} className="drop" style={{ borderColor: RARITY_COLOR[d.rarity] }}>
-                    <span>{SLOT_ICON[d.slot]}</span>
+                    <span><Ico n={`slot_${d.slot}`} /></span>
                     <div><b style={{ color: RARITY_COLOR[d.rarity] }}>{d.name}</b><small>{RARITY_LABEL[d.rarity]} {SLOT_LABEL[d.slot]}</small><small><GearLine e={d} /></small></div>
                   </div>
                 ))}
@@ -149,7 +149,7 @@ export function TreasureScreen() {
         <div className="rw-drops">
           {t.items.map((d) => (
             <div key={d.uid} className="drop" style={{ borderColor: RARITY_COLOR[d.rarity] }}>
-              <span>{SLOT_ICON[d.slot]}</span>
+              <span><Ico n={`slot_${d.slot}`} /></span>
               <div><b style={{ color: RARITY_COLOR[d.rarity] }}>{d.name}</b><small>{RARITY_LABEL[d.rarity]} {SLOT_LABEL[d.slot]}</small><small><GearLine e={d} /></small></div>
             </div>
           ))}

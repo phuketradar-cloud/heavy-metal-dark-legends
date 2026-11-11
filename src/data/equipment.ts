@@ -85,5 +85,4 @@ export const ELEM_LABEL: Record<Elem, string> = { phys: 'Physical', fire: 'Fire'
 export const SLOT_LABEL: Record<Slot, string> = {
   weapon: 'Weapon', helmet: 'Helmet', armor: 'Armor', gloves: 'Gloves', boots: 'Boots', accessory: 'Accessory',
 };
-export const SLOT_ICON: Record<Slot, string> = { weapon: '🗡', helmet: '⛑', armor: '🛡', gloves: '🧤', boots: '🥾', accessory: '📿' };
 export function sellValue(e: Equip) { return Math.round(25 * RMULT[e.rarity] * (1 + e.level * 0.5)); }

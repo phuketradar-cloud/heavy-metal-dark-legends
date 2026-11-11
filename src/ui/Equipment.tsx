@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { CHAR_LIST, CHARS, SLOT_UNLOCK } from '../data/characters';
-import { ELEM_LABEL, MAX_GEAR_LEVEL, PASSIVE_TEXT, SLOT_ICON, SLOT_LABEL, sellValue, upgradeGearCost, type Equip } from '../data/equipment';
+import { ELEM_LABEL, MAX_GEAR_LEVEL, PASSIVE_TEXT, SLOT_LABEL, sellValue, upgradeGearCost, type Equip } from '../data/equipment';
 import { RARITY_COLOR, RARITY_LABEL, SLOTS, type Slot } from '../engine/types';
 import { autoEquip, equipItem, equippedItems, sellGear, statsFor, toast, unequipSlot, upgradeGear, useGame } from '../game/store';
 import { Btn, DEFAULT_STATS, Ico } from './common';
@@ -47,7 +47,7 @@ export function EquipmentScreen() {
               const it = eq[sl]; const locked = cs.level < SLOT_UNLOCK[sl];
               return (
                 <div key={sl} className={`slot-big ${locked ? 'locked' : ''}`} style={{ borderColor: it ? RARITY_COLOR[it.rarity] : '#3a3040' }}>
-                  <div className="ico">{SLOT_ICON[sl]}</div>
+                  <div className="ico"><Ico n={`slot_${sl}`} /></div>
                   <div className="info">
                     <b>{SLOT_LABEL[sl]}</b>
                     {locked ? <small><Ico n="lock" /> Unlocks at level {SLOT_UNLOCK[sl]}</small> : it ? (
@@ -66,7 +66,7 @@ export function EquipmentScreen() {
         <div className="eq-right">
           <div className="filters">
             <button className={filter === 'all' ? 'on' : ''} onClick={() => setFilter('all')}>All</button>
-            {SLOTS.map((sl) => <button key={sl} className={filter === sl ? 'on' : ''} onClick={() => setFilter(sl)}>{SLOT_ICON[sl]} {SLOT_LABEL[sl]}</button>)}
+            {SLOTS.map((sl) => <button key={sl} className={filter === sl ? 'on' : ''} onClick={() => setFilter(sl)}><Ico n={`slot_${sl}`} /> {SLOT_LABEL[sl]}</button>)}
             <span className="muted" style={{ marginLeft: 'auto' }}>{s.inventory.length} items</span>
           </div>
           <div className="inv">
@@ -75,7 +75,7 @@ export function EquipmentScreen() {
               const by = equippedBy(e.uid);
               return (
                 <div key={e.uid} className="gear" style={{ borderColor: RARITY_COLOR[e.rarity] }}>
-                  <div className="gear-head"><span className="ico">{SLOT_ICON[e.slot]}</span>
+                  <div className="gear-head"><span className="ico"><Ico n={`slot_${e.slot}`} /></span>
                     <div><b style={{ color: RARITY_COLOR[e.rarity] }}>{e.name}{e.level ? ` +${e.level}` : ''}</b><small>{RARITY_LABEL[e.rarity]} {SLOT_LABEL[e.slot]}{by ? ` · on ${by.name}` : ''}</small></div></div>
                   <div className="gear-stats"><GearLine e={e} /></div>
                   <div className="row">
