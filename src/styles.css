@@ -399,3 +399,4 @@ input[type='range'] { accent-color: #c8182a; width: 220px; }
 .filters button .uico { width: 22px; height: 22px; }
 .drop > span .uico, .rw-stats + * .uico { width: 40px; height: 40px; }
 .slot .uico, .cs-slot .uico { width: 26px; height: 26px; }
+.status .uico { width: 28px; height: 28px; margin: 0 2px 0 0; }

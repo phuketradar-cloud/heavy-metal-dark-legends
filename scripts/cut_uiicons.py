@@ -6,6 +6,8 @@ NAMES = ['swords','star','star_off','cards','loop','gold','exp','upgrade','lock'
 COLS, ROWS, PFX = 5, 2, 'ui_'
 if len(sys.argv) > 2 and sys.argv[2] == 'slots':
     NAMES = ['weapon', 'armor', 'helmet', 'gloves', 'boots', 'accessory']; COLS, ROWS, PFX = 3, 2, 'ui_slot_'
+if len(sys.argv) > 2 and sys.argv[2] == 'status':
+    NAMES = ['atkUp', 'critUp', 'comboUp', 'guard', 'thorns', 'counter', 'burn', 'weak', 'curse', 'demon']; PFX = 'ui_st_'
 src = Image.open(sys.argv[1]).convert('RGB'); W, H = src.size
 for i, n in enumerate(NAMES):
     c, r = i % COLS, i // COLS

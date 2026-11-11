@@ -55,7 +55,7 @@ export function StatusRow({ list }: { list: Status[] }) {
         const i = STATUS_INFO[s.id];
         return (
           <div key={s.id} className={`status ${i.bad ? 'bad' : ''}`} title={`${i.name}: ${i.desc} (${s.turns} turn${s.turns > 1 ? 's' : ''})`}>
-            <span>{i.icon}</span><b>{s.turns}</b>
+            <Ico n={`st_${s.id}`} /><b>{s.turns}</b>
           </div>
         );
       })}
