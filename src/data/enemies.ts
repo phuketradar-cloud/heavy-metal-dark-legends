@@ -39,7 +39,7 @@ export interface MonsterArt {
   /** optional painted artwork in /public (already facing left); falls back to the SVG figure */
   img?: string; imgAspect?: number; face?: [number, number];
   /** opaque-pixel fraction of the image box and horizontal centre of mass (0..1) — used to size painted enemies by visual mass */
-  fill?: number; cx?: number;
+  fill?: number; cx?: number; boost?: number;
 }
 
 export interface Phase { at: number; moves: string[]; enrage?: boolean; label: string }
@@ -164,7 +164,7 @@ export const BOSSES: Record<string, EnemyDef> = Object.fromEntries([
 ].map((e) => [e.id, e as EnemyDef]));
 
 /** Painted artwork for regular enemies (files in /public/enemies). Entries are merged into each enemy's `art`. */
-export const ENEMY_ART: Record<string, { img: string; imgAspect: number; face: [number, number]; fill?: number; cx?: number }> = {
+export const ENEMY_ART: Record<string, { img: string; imgAspect: number; face: [number, number]; fill?: number; cx?: number; boost?: number }> = {
   ghoul: { img: 'enemies/ghoul.webp', imgAspect: 721 / 722, face: [0.39, 0.1], fill: 0.327, cx: 0.575 },
   plagueHound: { img: 'enemies/plagueHound.webp', imgAspect: 1094 / 708, face: [0.15, 0.45], fill: 0.398, cx: 0.468 },
   cultist: { img: 'enemies/cultist.webp', imgAspect: 687 / 716, face: [0.41, 0.15], fill: 0.523, cx: 0.552 },
@@ -185,6 +185,6 @@ export const ENEMY_ART: Record<string, { img: string; imgAspect: number; face: [
   colossus: { img: 'enemies/colossus.webp', imgAspect: 1008 / 763, face: [0.4, 0.24], fill: 0.492, cx: 0.509 },
   voidKnight: { img: 'enemies/voidKnight.webp', imgAspect: 678 / 762, face: [0.56, 0.14], fill: 0.347, cx: 0.621 },
   abyssBeast: { img: 'enemies/abyssBeast.webp', imgAspect: 1198 / 717, face: [0.09, 0.38], fill: 0.413, cx: 0.451 },
-  vanguard: { img: 'enemies/vanguard.webp', imgAspect: 1092 / 752, face: [0.45, 0.13], fill: 0.411, cx: 0.521 },
+  vanguard: { img: 'enemies/vanguard.webp', imgAspect: 1092 / 752, face: [0.45, 0.13], fill: 0.411, cx: 0.521, boost: 1.6 },
 };
 Object.entries(ENEMY_ART).forEach(([id, a]) => { if (ENEMIES[id]) Object.assign(ENEMIES[id].art, a); });

@@ -164,12 +164,13 @@ export function BattleScreen() {
   if (regularImg) {
     const fill = enemyDef.art.fill ?? 0.45, cx = enemyDef.art.cx ?? 0.5;
     const beast = asp >= 1.3;
+    const sc = enemyDef.art.boost ?? 1;         // per-enemy size boost (wide art with a small body)
     const target = 190523 * 1.1;               // hero opaque area (px²) × 1.1
     const area = target / fill;
     let ew = Math.sqrt(area * asp), eh = Math.sqrt(area / asp);
-    const k = Math.min(1, 780 / eh, (beast ? 600 : 760) / ew);
+    const k = Math.min(1, 780 / eh, (beast ? 600 : 760) * sc / ew);
     ew *= k; eh *= k;
-    const minLeft = beast ? 1060 : 940;       // may tuck a little behind the board frame (x≈1088)
+    const minLeft = sc > 1 ? 780 : beast ? 1060 : 940;       // may tuck a little behind the board frame (x≈1088)
     let left = 1250 - cx * ew;                 // body centre of mass sits nearer the middle of the screen
     left = Math.max(minLeft, Math.min(left, 1600 + 60 - ew));
     left = Math.max(minLeft, left);
