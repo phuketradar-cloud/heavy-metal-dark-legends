@@ -4,7 +4,7 @@ import { Embers } from './art';
 import { Btn } from './common';
 
 /** Characters that have their own painted ending (others fall back to the Metal Warrior one). */
-const ENDING_IMG = new Set(['warrior', 'deathKnight', 'darkPriest', 'guitarist', 'berserker'].filter((id) => ['warrior', 'guitarist'].includes(id)));
+const ENDING_IMG = new Set(['warrior', 'deathKnight', 'darkPriest', 'guitarist', 'berserker'].filter((id) => ['warrior', 'guitarist', 'deathKnight'].includes(id)));
 
 /** Shown after the final boss falls. */
 export function EndingScreen() {
