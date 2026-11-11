@@ -9,7 +9,7 @@ import {
   rewardRemove, rewardTakeGold, rewardUpgrade, statsFor, useGame,
 } from '../game/store';
 import { Backdrop, Embers, PlayerArt, MonsterView } from './art';
-import { Btn, CardView } from './common';
+import { Btn, CardView, Ico } from './common';
 import { GearLine } from './Equipment';
 import { BOSSES, ENEMIES } from '../data/enemies';
 
@@ -41,11 +41,11 @@ export function RewardScreen() {
           <div className="rw-hero"><PlayerArt art={CHARS[s.activeChar].art} /></div>
           <div className="rw-center">
             <h1 className="victory-title">{r.boss ? 'BOSS DEFEATED' : 'VICTORY'}</h1>
-            <div className="rw-stars">{[1, 2, 3].map((n) => <span key={n} className={n <= r.stars ? 'on' : 'off'}>★</span>)}</div>
+            <div className="rw-stars">{[1, 2, 3].map((n) => <span key={n} className={n <= r.stars ? 'on' : 'off'}><Ico n={n <= r.stars ? 'star' : 'star_off'} /></span>)}</div>
             <div className="rw-stats">
-              <span>💰 +{r.gold} gold</span><span>✨ +{r.exp} EXP</span>
-              {r.levelUps.map((l, i) => <span key={i} className="lvup">⬆ {l.name} reached Lv.{l.level}!</span>)}
-              {r.unlocked && <span className="lvup">🔓 {CHARS[r.unlocked].name} joins your party!</span>}
+              <span><Ico n="gold" /> +{r.gold} gold</span><span><Ico n="exp" /> +{r.exp} EXP</span>
+              {r.levelUps.map((l, i) => <span key={i} className="lvup"><Ico n="upgrade" /> {l.name} reached Lv.{l.level}!</span>)}
+              {r.unlocked && <span className="lvup"><Ico n="unlock" /> {CHARS[r.unlocked].name} joins your party!</span>}
             </div>
             {r.drops.length > 0 && (
               <div className="rw-drops">
@@ -75,9 +75,9 @@ export function RewardScreen() {
                   ))}
                 </div>
                 <div className="reward-opts">
-                  <Btn onClick={() => rewardMode('upgrade')}>⬆ Upgrade a card</Btn>
-                  <Btn onClick={() => rewardMode('remove')}>🗑 Remove a weak card</Btn>
-                  <Btn kind="gold" onClick={rewardTakeGold}>💰 Take {r.goldAlt} gold instead</Btn>
+                  <Btn onClick={() => rewardMode('upgrade')}><Ico n="upgrade" /> Upgrade a card</Btn>
+                  <Btn onClick={() => rewardMode('remove')}>✖ Remove a weak card</Btn>
+                  <Btn kind="gold" onClick={rewardTakeGold}><Ico n="gold" /> Take {r.goldAlt} gold instead</Btn>
                 </div>
               </>
             )}
@@ -145,7 +145,7 @@ export function TreasureScreen() {
         <div className="ev-ico">🧰</div>
         <h1>Treasure Chest</h1>
         <p className="ev-text">The lid creaks open, revealing glittering spoils.</p>
-        <div className="rw-stats"><span>💰 +{t.gold} gold</span></div>
+        <div className="rw-stats"><span><Ico n="gold" /> +{t.gold} gold</span></div>
         <div className="rw-drops">
           {t.items.map((d) => (
             <div key={d.uid} className="drop" style={{ borderColor: RARITY_COLOR[d.rarity] }}>

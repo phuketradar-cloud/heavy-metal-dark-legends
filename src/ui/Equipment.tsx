@@ -3,7 +3,7 @@ import { CHAR_LIST, CHARS, SLOT_UNLOCK } from '../data/characters';
 import { ELEM_LABEL, MAX_GEAR_LEVEL, PASSIVE_TEXT, SLOT_ICON, SLOT_LABEL, sellValue, upgradeGearCost, type Equip } from '../data/equipment';
 import { RARITY_COLOR, RARITY_LABEL, SLOTS, type Slot } from '../engine/types';
 import { autoEquip, equipItem, equippedItems, sellGear, statsFor, toast, unequipSlot, upgradeGear, useGame } from '../game/store';
-import { Btn, DEFAULT_STATS } from './common';
+import { Btn, DEFAULT_STATS, Ico } from './common';
 import { Portrait } from './art';
 import { ScreenFrame } from './Frame';
 
@@ -50,7 +50,7 @@ export function EquipmentScreen() {
                   <div className="ico">{SLOT_ICON[sl]}</div>
                   <div className="info">
                     <b>{SLOT_LABEL[sl]}</b>
-                    {locked ? <small>🔒 Unlocks at level {SLOT_UNLOCK[sl]}</small> : it ? (
+                    {locked ? <small><Ico n="lock" /> Unlocks at level {SLOT_UNLOCK[sl]}</small> : it ? (
                       <><span style={{ color: RARITY_COLOR[it.rarity] }}>{it.name}{it.level ? ` +${it.level}` : ''}</span><small><GearLine e={it} /></small></>
                     ) : <small>Empty</small>}
                   </div>
@@ -80,7 +80,7 @@ export function EquipmentScreen() {
                   <div className="gear-stats"><GearLine e={e} /></div>
                   <div className="row">
                     <Btn kind="gold" disabled={by?.id === cid} onClick={() => msg(equipItem(cid, e.uid), `${e.name} equipped.`)}>{by?.id === cid ? 'Equipped' : 'Equip'}</Btn>
-                    <Btn disabled={e.level >= MAX_GEAR_LEVEL || s.gold < upgradeGearCost(e)} onClick={() => msg(upgradeGear(e.uid), 'Upgraded!')}>{e.level >= MAX_GEAR_LEVEL ? 'Max' : `⬆ 💰${upgradeGearCost(e)}`}</Btn>
+                    <Btn disabled={e.level >= MAX_GEAR_LEVEL || s.gold < upgradeGearCost(e)} onClick={() => msg(upgradeGear(e.uid), 'Upgraded!')}>{e.level >= MAX_GEAR_LEVEL ? 'Max' : <><Ico n="upgrade" /><Ico n="gold" />{upgradeGearCost(e)}</>}</Btn>
                     <Btn kind="ghost" disabled={!!by} onClick={() => { sellGear(e.uid); toast(`Sold for ${sellValue(e)} gold.`); }}>Sell {sellValue(e)}</Btn>
                   </div>
                 </div>

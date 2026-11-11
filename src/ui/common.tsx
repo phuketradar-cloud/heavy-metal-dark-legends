@@ -4,6 +4,15 @@ import { RARITY_COLOR, RARITY_LABEL, STATUS_INFO, type PlayerStats, type Status 
 import { audio } from '../engine/audio';
 import { CardArt } from './art';
 
+/** Painted UI icon (public/icons/ui_<n>.webp), sized to the surrounding text. */
+export function Ico({ n }: { n: string }) {
+  return <img className="uico" src={`${import.meta.env.BASE_URL}icons/ui_${n}.webp`} alt="" draggable={false} />;
+}
+/** `n` lit stars followed by empty ones up to `of`. */
+export function Stars({ n, of = 3 }: { n: number; of?: number }) {
+  return <>{Array.from({ length: of }, (_, i) => <Ico key={i} n={i < n ? 'star' : 'star_off'} />)}</>;
+}
+
 export function useFitScale(w = 1600, h = 900) {
   const [s, setS] = useState(1);
   useEffect(() => {
@@ -82,7 +91,7 @@ export function CardView({ id, level = 1, onClick, disabled, selected, small, bi
       {hotkey !== undefined && <div className="card-key">{hotkey}</div>}
       {count !== undefined && count > 1 && <div className="card-count">×{count}</div>}
       <CardArt id={id} />
-      <div className="card-name">{def.name}{level > 1 ? <i> {'★'.repeat(level - 1)}</i> : null}</div>
+      <div className="card-name">{def.name}{level > 1 ? <i> <Stars n={level - 1} of={level - 1} /></i> : null}</div>
       <div className="card-cat" style={{ color: CAT_COLOR[def.cat] }}>{CAT_LABEL[def.cat]} · <span style={{ color: rc }}>{RARITY_LABEL[def.rarity]}</span></div>
       <div className="card-desc">{def.text(level, stats ?? DEFAULT_STATS)}</div>
       {level >= MAX_CARD_LEVEL && <div className="card-max">MAX</div>}

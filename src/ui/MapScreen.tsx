@@ -6,7 +6,7 @@ import { audio } from '../engine/audio';
 import { battleCtxFor, regionUnlocked, startNode, useGame } from '../game/store';
 import { Embers, NODE_IMG, Portrait, REGION_IMG } from './art';
 import { ScreenFrame } from './Frame';
-import { Btn } from './common';
+import { Btn, Ico, Stars } from './common';
 
 // centres of the seven region medallions, on the painted road of public/map/dark-realm.webp (stage px, 1600×900)
 const POS: [number, number][] = [[151, 424], [442, 350], [634, 396], [855, 366], [1076, 428], [1279, 414], [1465, 424]];
@@ -53,7 +53,7 @@ export function WorldMap() {
             <div title={BOSSES[r.boss].name} className="boss"><Portrait art={BOSSES[r.boss].art} monster size={64} /></div>
           </div>
         </div>
-        {!unlocked ? <p className="muted">🔒 Defeat the boss of {REGIONS[sel - 1].name} to enter.</p> : (
+        {!unlocked ? <p className="muted"><Ico n="lock" /> Defeat the boss of {REGIONS[sel - 1].name} to enter.</p> : (
           <>
             <div className="nodes">
               {r.nodes.map((k, i) => {
@@ -67,7 +67,7 @@ export function WorldMap() {
                     <span className="n-ico">{oneShot ? <img className="n-img" src={`${import.meta.env.BASE_URL}${NODE_IMG.cleared}`} alt="" draggable={false} /> : NODE_IMG[k] ? <img className="n-img" src={`${import.meta.env.BASE_URL}${NODE_IMG[k]}`} alt="" draggable={false} /> : NODE_ICON[k]}</span>
                     <b>{preview}</b>
                     <small>{k === 'battle' || k === 'elite' || k === 'boss' ? `Lv.${nodeLevel(r, i, k)} · ${NODE_LABEL[k]}` : NODE_LABEL[k]}</small>
-                    {stars > 0 && <em>{'★'.repeat(stars)}{'☆'.repeat(3 - stars)}</em>}
+                    {stars > 0 && <em><Stars n={stars} /></em>}
                   </button>
                 );
               })}

@@ -6,7 +6,7 @@ import { SLOT_ICON, SLOT_LABEL } from '../data/equipment';
 import { audio } from '../engine/audio';
 import { continueGame, equippedItems, go, hasSave, newGame, selectChar, statsFor, updateSettings, useGame } from '../game/store';
 import { Backdrop, Embers, PlayerArt, Portrait, MonsterView } from './art';
-import { Bar, Btn } from './common';
+import { Bar, Btn, Ico } from './common';
 import { ScreenFrame } from './Frame';
 import { BOSSES } from '../data/enemies';
 
@@ -103,7 +103,7 @@ export function CharacterScreen() {
                 <div>
                   <b>{c.name}</b>
                   <span style={{ color: RARITY_COLOR[c.rarity] }}>{RARITY_LABEL[c.rarity]}</span>
-                  <small>{u ? `Lv.${s.chars[c.id].level}${s.activeChar === c.id ? ' · Leader' : ''}` : '🔒 Locked'}</small>
+                  <small>{u ? `Lv.${s.chars[c.id].level}${s.activeChar === c.id ? ' · Leader' : ''}` : <><Ico n="lock" /> Locked</>}</small>
                 </div>
               </div>
             );
@@ -114,7 +114,7 @@ export function CharacterScreen() {
           <h2 style={{ color: RARITY_COLOR[def.rarity] }}>{def.name}</h2>
           <div className="sub">{def.title} · {RARITY_LABEL[def.rarity]}</div>
           <p className="blurb">{def.blurb}</p>
-          {!cs.unlocked && <p className="locked-note">🔒 {def.unlock}</p>}
+          {!cs.unlocked && <p className="locked-note"><Ico n="lock" /> {def.unlock}</p>}
           {cs.unlocked && (
             <>
               <div className="lv-row"><b>Level {cs.level}</b>{cs.level < MAX_LEVEL ? <Bar kind="exp" value={cs.exp} max={next} label={`EXP ${cs.exp} / ${next}`} height={16} /> : <span>MAX</span>}</div>
@@ -135,7 +135,7 @@ export function CharacterScreen() {
               <div className="slot-mini">
                 {SLOTS.map((sl) => (
                   <div key={sl} className="slot" title={eq[sl] ? `${eq[sl]!.name}` : `${SLOT_LABEL[sl]} — unlocks at Lv.${SLOT_UNLOCK[sl]}`} style={{ borderColor: eq[sl] ? RARITY_COLOR[eq[sl]!.rarity] : '#444' }}>
-                    {SLOT_ICON[sl]}<small>{cs.level < SLOT_UNLOCK[sl] ? `🔒${SLOT_UNLOCK[sl]}` : eq[sl]?.name ?? '—'}</small>
+                    {SLOT_ICON[sl]}<small>{cs.level < SLOT_UNLOCK[sl] ? <><Ico n="lock" />{SLOT_UNLOCK[sl]}</> : eq[sl]?.name ?? '—'}</small>
                   </div>
                 ))}
               </div>

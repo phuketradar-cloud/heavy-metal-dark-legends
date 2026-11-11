@@ -1,7 +1,7 @@
 import { CHARS } from '../data/characters';
 import { go, useGame } from '../game/store';
 import { Embers } from './art';
-import { Btn } from './common';
+import { Btn, Ico } from './common';
 
 /** Shown after the final boss falls. */
 export function EndingScreen() {
@@ -20,7 +20,7 @@ export function EndingScreen() {
       </div>
       <div className="ending-bottom">
         <div className="ending-stats">
-          <span>⚔ {s.stats.wins} victories</span><span>★ {stars} stars</span><span>🃏 {s.deck.length} cards</span><span>🔁 Run #{s.stats.runs}</span>
+          <span><Ico n="swords" /> {s.stats.wins} victories</span><span><Ico n="star" /> {stars} stars</span><span><Ico n="cards" /> {s.deck.length} cards</span><span><Ico n="loop" /> Run #{s.stats.runs}</span>
         </div>
         <div className="row">
           <Btn kind="gold" onClick={() => go('map')}>Return to Map</Btn>

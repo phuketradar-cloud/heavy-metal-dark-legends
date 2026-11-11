@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { CARD_LIST, CARDS, CAT_COLOR, CAT_LABEL, MAX_CARD_LEVEL, MAX_DECK, MIN_DECK, upgradeCost } from '../data/cards';
 import { RARITIES, RARITY_COLOR, RARITY_LABEL, type CardCat, type Rarity } from '../engine/types';
 import { addToDeck, inDeckCount, ownedCount, removeFromDeck, statsFor, toast, upgradeCardLevel, useGame } from '../game/store';
-import { Btn, CardView } from './common';
+import { Btn, CardView, Ico, Stars } from './common';
 import { ScreenFrame } from './Frame';
 
 const CATS: CardCat[] = ['attack', 'defense', 'support', 'magic', 'passive'];
@@ -48,7 +48,7 @@ export function CollectionScreen() {
               </div>
               <div className="row">
                 <Btn kind="gold" disabled={lv >= MAX_CARD_LEVEL || s.gold < upgradeCost(sel, lv)} onClick={() => msg(upgradeCardLevel(sel), `${CARDS[sel].name} upgraded!`)}>
-                  {lv >= MAX_CARD_LEVEL ? 'Max Level' : `Upgrade · 💰${upgradeCost(sel, lv)}`}
+                  {lv >= MAX_CARD_LEVEL ? 'Max Level' : <>Upgrade · <Ico n="gold" />{upgradeCost(sel, lv)}</>}
                 </Btn>
                 <Btn disabled={s.deck.length >= MAX_DECK || inDeckCount(s, sel) >= owned} onClick={() => msg(addToDeck(sel), 'Added to deck.')}>Add to Deck</Btn>
               </div>
@@ -91,7 +91,7 @@ export function DeckBuilder() {
             {groups.map(([id, n]) => (
               <div key={id} className="deck-row" style={{ borderLeftColor: RARITY_COLOR[CARDS[id].rarity] }} onClick={() => msg(removeFromDeck(s.deck.indexOf(id)))} title={CARDS[id].text(s.cardLevels[id] ?? 1, stats)}>
                 <span className="cost">{CARDS[id].cost}</span>
-                <span className="nm">{CARDS[id].name}{(s.cardLevels[id] ?? 1) > 1 ? ' ★'.repeat((s.cardLevels[id] ?? 1) - 1) : ''}</span>
+                <span className="nm">{CARDS[id].name}{(s.cardLevels[id] ?? 1) > 1 ? <> <Stars n={(s.cardLevels[id] ?? 1) - 1} of={(s.cardLevels[id] ?? 1) - 1} /></> : ''}</span>
                 <span className="ct" style={{ color: CAT_COLOR[CARDS[id].cat] }}>{CAT_LABEL[CARDS[id].cat]}</span>
                 <b>×{n}</b>
               </div>

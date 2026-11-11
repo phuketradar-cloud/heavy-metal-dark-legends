@@ -12,7 +12,7 @@ import {
   deckInstances, equippedItems, finishBattle, go, partyAssists, setAuto, statsFor, updateSettings, useGame,
 } from '../game/store';
 import { Backdrop, Embers, Icon, MonsterView, PlayerArt, Portrait, TILE_BG, TILE_IMG, TILE_RIM, SKILL_IMG } from './art';
-import { Bar, Btn, CardView, Particles, StatusRow, type FxHandle } from './common';
+import { Bar, Btn, Ico, CardView, Particles, StatusRow, type FxHandle } from './common';
 
 const T = 68, PAD = 16, FRAME_L = 512, FRAME_T = 112;
 const BX = FRAME_L + PAD, BY = FRAME_T + PAD;
@@ -242,9 +242,9 @@ export function BattleScreen() {
         <div className="stage-title">{region.name}</div>
         <div className="stage-sub">STAGE {ctx.region + 1}-{ctx.node + 1} · {ctx.kind === 'boss' ? 'BOSS' : ctx.kind === 'elite' ? 'ELITE' : 'BATTLE'}</div>
         <div className="stage-stars">
-          <span className="on">★</span>
-          <span className={view.turn <= view.objTurns ? 'on' : 'off'}>★</span>
-          <span className={p.hp / p.maxHp > 0.5 ? 'on' : 'off'}>★</span>
+          <span className="on"><Ico n="star" /></span>
+          <span className={view.turn <= view.objTurns ? 'on' : 'off'}><Ico n={view.turn <= view.objTurns ? 'star' : 'star_off'} /></span>
+          <span className={p.hp / p.maxHp > 0.5 ? 'on' : 'off'}><Ico n={p.hp / p.maxHp > 0.5 ? 'star' : 'star_off'} /></span>
         </div>
       </div>
 
@@ -309,9 +309,9 @@ export function BattleScreen() {
       {/* mission */}
       <div className="mission">
         <div className="mission-title">Mission</div>
-        <div className={`mission-row on`}><span>★</span>Defeat {ctx.kind === 'boss' ? 'the Boss' : 'the Enemy'}</div>
-        <div className={`mission-row ${view.turn <= view.objTurns ? 'on' : 'off'}`}><span>★</span>Clear within {view.objTurns} turns <small>({view.turn})</small></div>
-        <div className={`mission-row ${p.hp / p.maxHp > 0.5 ? 'on' : 'off'}`}><span>★</span>HP &gt; 50%</div>
+        <div className={`mission-row on`}><span><Ico n="star" /></span>Defeat {ctx.kind === 'boss' ? 'the Boss' : 'the Enemy'}</div>
+        <div className={`mission-row ${view.turn <= view.objTurns ? 'on' : 'off'}`}><span><Ico n={view.turn <= view.objTurns ? 'star' : 'star_off'} /></span>Clear within {view.objTurns} turns <small>({view.turn})</small></div>
+        <div className={`mission-row ${p.hp / p.maxHp > 0.5 ? 'on' : 'off'}`}><span><Ico n={p.hp / p.maxHp > 0.5 ? 'star' : 'star_off'} /></span>HP &gt; 50%</div>
       </div>
 
       {/* ───────── bottom left: energy & piles ───────── */}
