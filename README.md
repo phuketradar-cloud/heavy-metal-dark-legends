@@ -1,5 +1,7 @@
 # HEAVY METAL – DARK LEGENDS
 
+**Play online:** https://phuketradar-cloud.github.io/heavy-metal-dark-legends/
+
 A Heavy Metal dark-fantasy **Match-3 RPG** with turn-based combat, collectible ability cards, deck building,
 roguelite rewards, equipment, and a 7-region campaign with bosses.
 
