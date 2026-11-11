@@ -414,3 +414,8 @@ input[type='range'] { accent-color: #c8182a; width: 220px; }
 .float .uico { width: 1.1em; height: 1.1em; margin: 0 .05em; vertical-align: -0.15em; }
 .sp-mark .uico { width: 22px; height: 22px; margin: 0; }
 .gear-passive .uico { width: 18px; height: 18px; }
+
+/* reward result panel: keep the frame, centre it on screen and keep the buttons inside the border */
+.picked.panel { position: absolute; left: 50%; top: 60%; transform: translate(-50%, -50%); width: 760px; margin: 0 !important; padding: 56px 80px !important; display: flex; flex-direction: column; align-items: center; gap: 8px; box-sizing: border-box; }
+.picked.panel p { margin: 0; font-size: 30px; text-align: center; }
+.picked.panel .row { justify-content: center; margin-top: 18px; }
