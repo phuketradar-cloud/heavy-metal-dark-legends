@@ -8,6 +8,9 @@ if len(sys.argv) > 2 and sys.argv[2] == 'slots':
     NAMES = ['weapon', 'armor', 'helmet', 'gloves', 'boots', 'accessory']; COLS, ROWS, PFX = 3, 2, 'ui_slot_'
 if len(sys.argv) > 2 and sys.argv[2] == 'status':
     NAMES = ['atkUp', 'critUp', 'comboUp', 'guard', 'thorns', 'counter', 'burn', 'weak', 'curse', 'demon']; PFX = 'ui_st_'
+if len(sys.argv) > 2 and sys.argv[2] == 'moves':
+    NAMES = ['slash', 'smash', 'flurry', 'fireBolt', 'hellfire', 'darkBolt', 'bite', 'pounce', 'curse', 'drain', 'heal', 'summon', 'guard', 'warcry', 'scramble', 'chain', 'lightning', 'meteor', 'doom', 'unknown']
+    COLS, ROWS, PFX = 5, 4, 'ui_mv_'
 src = Image.open(sys.argv[1]).convert('RGB'); W, H = src.size
 for i, n in enumerate(NAMES):
     c, r = i % COLS, i // COLS

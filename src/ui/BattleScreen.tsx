@@ -261,7 +261,7 @@ export function BattleScreen() {
       {/* intent telegraph */}
       {intent && !result && (
         <div className={`intent ${heavy ? 'heavy' : ''}`} style={{ left: 1130, top: enemyDef.art.img ? 128 : ctx.kind === 'boss' ? 148 : 178 }}>
-          <div className="intent-icon">{intent.icon}</div>
+          <div className="intent-icon"><Ico n={`mv_${intent.moveId}`} /></div>
           <div>
             <div className="intent-name">{intent.name}{intent.hits > 1 ? ` ×${intent.hits}` : ''}</div>
             <div className="intent-tele">{intent.tele}</div>
@@ -270,7 +270,7 @@ export function BattleScreen() {
         </div>
       )}
       <div className="abilities" title="Enemy abilities this phase">
-        {moveSet.map((m) => <span key={m.id} className={m.id === intent?.moveId ? 'cur' : ''} title={`${m.name}: ${m.tele}`}>{m.icon}</span>)}
+        {moveSet.map((m) => <span key={m.id} className={m.id === intent?.moveId ? 'cur' : ''} title={`${m.name}: ${m.tele}`}><Ico n={`mv_${m.id}`} /></span>)}
       </div>
 
       {/* ───────── board ───────── */}
