@@ -40,7 +40,7 @@ export function EquipmentScreen() {
           </div>
           <h3>{CHARS[cid].name} <small>Lv.{cs.level}</small></h3>
           <div className="row" style={{ margin: '4px 0 10px' }}>
-            <Btn kind="gold" onClick={() => toast(autoEquip(cid))}>⚡ Auto-Equip Best</Btn>
+            <Btn kind="gold" onClick={() => toast(autoEquip(cid))}><Ico n="h_autoequip" /> Auto-Equip Best</Btn>
           </div>
           <div className="slots">
             {SLOTS.map((sl) => {
@@ -54,7 +54,7 @@ export function EquipmentScreen() {
                       <><span style={{ color: RARITY_COLOR[it.rarity] }}>{it.name}{it.level ? ` +${it.level}` : ''}</span><small><GearLine e={it} /></small></>
                     ) : <small>Empty</small>}
                   </div>
-                  {it && <button className="x" onClick={() => unequipSlot(cid, sl)} title="Unequip">✕</button>}
+                  {it && <button className="x" onClick={() => unequipSlot(cid, sl)} title="Unequip"><Ico n="h_close" /></button>}
                 </div>
               );
             })}

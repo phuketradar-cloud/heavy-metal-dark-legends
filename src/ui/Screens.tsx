@@ -5,7 +5,7 @@ import { RARITY_COLOR, RARITY_LABEL, SLOTS } from '../engine/types';
 import { SLOT_LABEL } from '../data/equipment';
 import { audio } from '../engine/audio';
 import { continueGame, equippedItems, go, hasSave, newGame, selectChar, statsFor, updateSettings, useGame } from '../game/store';
-import { Backdrop, Embers, PlayerArt, Portrait, MonsterView } from './art';
+import { Backdrop, Embers, PlayerArt, Portrait, MonsterView, TILE_IMG } from './art';
 import { Bar, Btn, Ico } from './common';
 import { ScreenFrame } from './Frame';
 import { BOSSES } from '../data/enemies';
@@ -168,7 +168,7 @@ export function SettingsScreen() {
         <h3>How to play</h3>
         <ul>
           <li>Click (or drag) a tile onto an adjacent tile to swap. Match 3+ of the same rune. You get <b>2 moves</b> per turn.</li>
-          <li>💀 Skull physical · 🎸 Guitar fire · ⚡ Lightning · 👁 Demon Eye dark magic + MP · ✚ Iron Cross shield · 🪓 Axe crit chance.</li>
+          <li>{[['Skull', 'physical'], ['Guitar', 'fire'], ['Lightning', 'lightning'], ['Demon Eye', 'dark magic + MP'], ['Iron Cross', 'shield'], ['Axe', 'crit chance']].map(([n, d], i) => <span key={n}><img className="tile-inline" src={`${import.meta.env.BASE_URL}${TILE_IMG[i]}`} alt="" draggable={false} /> {n} {d}{i < 5 ? ' · ' : '.'}</span>)}</li>
           <li>Match 4 = <b>Blast tile</b> (clears a line). Match 5/L/T = <b>Ultimate tile</b> (clears every tile of its kind). Match 6+ = <b>area strike</b>. Swap a special tile to trigger it.</li>
           <li>Each cascade raises the <b>combo multiplier</b>. Cards cost energy; passive cards power up the whole battle.</li>
           <li>Watch the enemy's <b>telegraph</b> above it, then block with defense cards. Hotkeys: 1–5 cards, Space end turn, U ultimate.</li>

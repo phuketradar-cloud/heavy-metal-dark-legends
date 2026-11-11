@@ -76,7 +76,7 @@ export function RewardScreen() {
                 </div>
                 <div className="reward-opts">
                   <Btn onClick={() => rewardMode('upgrade')}><Ico n="upgrade" /> Upgrade a card</Btn>
-                  <Btn onClick={() => rewardMode('remove')}>✖ Remove a weak card</Btn>
+                  <Btn onClick={() => rewardMode('remove')}><Ico n="h_trash" /> Remove a weak card</Btn>
                   <Btn kind="gold" onClick={rewardTakeGold}><Ico n="gold" /> Take {r.goldAlt} gold instead</Btn>
                 </div>
               </>

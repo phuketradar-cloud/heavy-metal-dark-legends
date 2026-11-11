@@ -204,11 +204,11 @@ export function BattleScreen() {
             <div style={{ transform: enemyDef.art.kind === 'humanoid' && !enemyDef.art.img ? 'scaleX(-1)' : undefined, height: '100%' }}><MonsterView art={enemyDef.art} /></div>
           </div>
         </div>
-        {e.minions > 0 && <div className="minions">{Array.from({ length: e.minions }, (_, i) => <span key={i}>💀</span>)}</div>}
+        {e.minions > 0 && <div className="minions">{Array.from({ length: e.minions }, (_, i) => <span key={i}><Ico n="h_minion" /></span>)}</div>}
       </div>
 
       {/* ───────── HUD top left ───────── */}
-      <button className="hud-menu" onClick={() => { audio.unlock(); setPause(true); }} aria-label="Menu">☰</button>
+      <button className="hud-menu" onClick={() => { audio.unlock(); setPause(true); }} aria-label="Menu"><Ico n="h_menu" /></button>
       <div className="hud-player">
         <div className="hud-portrait"><Portrait art={charDef.art} size={104} /><span className="lvl-badge">Lv.{save.chars[charDef.id].level}</span></div>
         <div className="hud-info">
@@ -217,8 +217,8 @@ export function BattleScreen() {
           <Bar kind="mp" value={p.mp} max={p.maxMp} label={`MP ${p.mp} / ${p.maxMp}`} height={18} />
           <div className="hud-row">
             <StatusRow list={p.statuses} />
-            {p.passives.map((ps) => <div key={ps.id} className="status" title={CARDS[ps.id]?.name ?? ps.id}><span>✦</span></div>)}
-            {p.rage > 0 && <div className="status" title="Rage stacks"><span>😡</span><b>{p.rage}</b></div>}
+            {p.passives.map((ps) => <div key={ps.id} className="status" title={CARDS[ps.id]?.name ?? ps.id}><Ico n="h_perk" /></div>)}
+            {p.rage > 0 && <div className="status" title="Rage stacks"><Ico n="h_rage" /><b>{p.rage}</b></div>}
           </div>
           <div className="hud-gear">
             {SLOTS.map((s) => <span key={s} className="gear-pip" title={equip[s]?.name ?? `${s} (empty)`} style={{ borderColor: equip[s] ? RARITY_COLOR[equip[s]!.rarity] : '#333', opacity: equip[s] ? 1 : 0.4 }}><Ico n={`slot_${s}`} /></span>)}
@@ -318,11 +318,11 @@ export function BattleScreen() {
         <div className="energy-orb"><b>{view.energy}</b><small>/ {view.maxEnergy}</small><span>ENERGY</span></div>
         <div className="piles">
           <div title="Draw pile"><Icon id="crystal" size={22} /> {view.draw.length}<small>draw</small></div>
-          <div title="Discard pile">♻ {view.discard.length}<small>discard</small></div>
+          <div title="Discard pile"><Ico n="h_discard" /> {view.discard.length}<small>discard</small></div>
         </div>
         <div className="quick">
-          <button title="Show hint" onClick={() => { audio.unlock(); showHint(); }}>💡</button>
-          <button title="Pause" onClick={() => { audio.unlock(); setPause(true); }}>⚙</button>
+          <button title="Show hint" onClick={() => { audio.unlock(); showHint(); }}><Ico n="h_hint" /></button>
+          <button title="Pause" onClick={() => { audio.unlock(); setPause(true); }}><Ico n="h_gear" /></button>
         </div>
       </div>
 

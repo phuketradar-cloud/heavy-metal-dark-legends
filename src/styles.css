@@ -403,3 +403,10 @@ input[type='range'] { accent-color: #c8182a; width: 220px; }
 .intent-icon .uico { width: 56px; height: 56px; margin: 0; vertical-align: middle; }
 .moveset .uico, .enemy-moves .uico { width: 26px; height: 26px; margin: 0; }
 .abilities span { width: 40px; height: 40px; } .abilities .uico { width: 32px; height: 32px; margin: 0; }
+.hud-menu .uico { width: 44px; height: 44px; margin: 0; }
+.minions .uico { width: 40px; height: 40px; margin: 0; }
+.quick .uico { width: 34px; height: 34px; margin: 0; }
+.piles .uico { width: 28px; height: 28px; margin: 0; }
+.status .uico { margin: 0 2px 0 0; }
+.slot-big .x .uico { width: 18px; height: 18px; margin: 0; }
+.tile-inline { width: 30px; height: 30px; vertical-align: middle; object-fit: contain; }
