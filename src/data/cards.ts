@@ -123,7 +123,7 @@ export const CARD_LIST: CardDef[] = [
   {
     id: 'meteorStorm', name: 'Meteor Storm', cat: 'magic', rarity: 'epic', cost: 4,
     text: (l, s) => `Three meteors, each ${n((30 + s.mag * 0.9 + s.atk * 0.4) * sc(l))} fire DMG.`,
-    run: (c, l) => { for (let i = 0; i < 3; i++) c.hit('fire', (30 + c.stats.mag * 0.9 + c.stats.atk * 0.4) * sc(l), { label: '☄' }); },
+    run: (c, l) => { for (let i = 0; i < 3; i++) c.hit('fire', (30 + c.stats.mag * 0.9 + c.stats.atk * 0.4) * sc(l), { label: '[[mv_meteor]]' }); },
   },
   {
     id: 'demonSummoning', name: 'Demon Summoning', cat: 'magic', rarity: 'legendary', cost: 3,
@@ -131,7 +131,7 @@ export const CARD_LIST: CardDef[] = [
     run: (c, l) => {
       const v = (35 + c.stats.mag * 1.1) * sc(l);
       c.buff('demon', 3, v);
-      c.hit('dark', v, { label: '👹' });
+      c.hit('dark', v, { label: '[[st_demon]]' });
     },
   },
   // ───────── PASSIVE (power cards: play once, active for the rest of the battle) ─────────

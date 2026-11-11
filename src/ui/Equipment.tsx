@@ -16,7 +16,7 @@ export function GearLine({ e }: { e: Equip }) {
   if (e.mag) parts.push(`MAG +${Math.round(e.mag * m)}`);
   if (e.crit) parts.push(`CRIT +${(e.crit * m).toFixed(1)}%`);
   if (e.elem && e.elemPct) parts.push(`${ELEM_LABEL[e.elem]} DMG +${Math.round(e.elemPct * m)}%`);
-  return <>{parts.join(' · ')}{e.passive && <div className="gear-passive">✦ {PASSIVE_TEXT[e.passive]}</div>}</>;
+  return <>{parts.join(' · ')}{e.passive && <div className="gear-passive"><Ico n="h_perk" /> {PASSIVE_TEXT[e.passive]}</div>}</>;
 }
 
 export function EquipmentScreen() {

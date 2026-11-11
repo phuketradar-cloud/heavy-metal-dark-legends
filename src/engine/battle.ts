@@ -223,7 +223,7 @@ export class Battle {
       heal: (n) => { self.healPlayer(n); self.emit(280); },
       shield: (n) => { self.addShield(n); self.emit(280); },
       mp: (n) => { self.gainMp(n * 1); self.emit(220); },
-      energy: (n) => { self.s.energy += n; self.text('player', `+${n} ⚡`, '#ffd24a'); self.emit(220); },
+      energy: (n) => { self.s.energy += n; self.text('player', `+${n} [[h_autoequip]]`, '#ffd24a'); self.emit(220); },
       draw: (n) => { self.drawCards(n); self.emit(240); },
       loseHp: (n) => {
         const p = self.s.player; const l = Math.round(Math.min(n, p.hp - 1)); p.hp -= l;
@@ -349,7 +349,7 @@ export class Battle {
       if (mr && step.groups.some((g) => g.size >= 4) && this.resonanceThisTurn < 2) {
         const gain = mr.lvl >= 3 ? 2 : 1;
         s.energy += gain; this.resonanceThisTurn += 1; this.gainMp(10);
-        this.text('player', `+${gain} ⚡ RESONANCE`, '#ffd24a');
+        this.text('player', `+${gain} [[h_autoequip]] RESONANCE`, '#ffd24a');
       }
       // visuals
       step.cleared.forEach((c) => {
@@ -437,7 +437,7 @@ export class Battle {
   focusSkill(): BEvent[] {
     const s = this.s;
     if (s.phase !== 'player' || s.player.mp < 25) return [];
-    s.player.mp -= 25; s.energy += 1; this.text('player', '+1 ⚡ FOCUS', '#ffd24a'); this.sfxs.push('buff'); this.emit(400);
+    s.player.mp -= 25; s.energy += 1; this.text('player', '+1 [[h_autoequip]] FOCUS', '#ffd24a'); this.sfxs.push('buff'); this.emit(400);
     return this.flush();
   }
 
@@ -478,11 +478,11 @@ export class Battle {
     if (p.shield > 0) { absorbed = Math.min(p.shield, d); p.shield -= absorbed; }
     const hpLoss = d - absorbed;
     p.hp = Math.max(0, p.hp - hpLoss);
-    this.fx.push({ kind: 'dmg', target: 'player', text: `${label ?? ''}${hpLoss > 0 ? hpLoss : '🛡' + absorbed}`, color: hpLoss > 0 ? '#ff5a5a' : '#9ad0ff' });
+    this.fx.push({ kind: 'dmg', target: 'player', text: `${label ?? ''}${hpLoss > 0 ? hpLoss : '[[st_guard]]' + absorbed}`, color: hpLoss > 0 ? '#ff5a5a' : '#9ad0ff' });
     this.anim.player = 'hit'; this.shakeAmt = Math.max(this.shakeAmt, 6); this.sfxs.push('playerHit');
     const th = this.pStatus('thorns');
     const thorns = (th?.value ?? 0) + this.stats.thorns;
-    if (thorns > 0) this.hitEnemy('dark', thorns, { noMods: true, noCrit: true, label: '🌵', quiet: true });
+    if (thorns > 0) this.hitEnemy('dark', thorns, { noMods: true, noCrit: true, label: '[[st_thorns]]', quiet: true });
     return d;
   }
 
@@ -526,7 +526,7 @@ export class Battle {
       }
     }
     if (e.minions > 0 && s.player.hp > 0) {
-      this.hitPlayer(atk * 0.16 * e.minions, '💀'); this.emit(350);
+      this.hitPlayer(atk * 0.16 * e.minions, '[[h_minion]]'); this.emit(350);
     }
   }
 
@@ -539,20 +539,20 @@ export class Battle {
 
     // allies strike at the end of the player's turn
     const demon = this.pStatus('demon');
-    if (demon) { this.hitEnemy('dark', demon.value, { noCrit: true, label: '👹' }); this.anim.player = 'cast'; this.emit(420); }
+    if (demon) { this.hitEnemy('dark', demon.value, { noCrit: true, label: '[[st_demon]]' }); this.anim.player = 'cast'; this.emit(420); }
     for (const a of this.party) {
       this.hitEnemy('phys', a.atk * 0.9 + a.mag * 0.4, { noMods: true, noCrit: true, label: a.name.split(' ')[0] }); this.emit(320);
     }
     this.checkPhase();
     const burnE = this.eStatus('burn');
-    if (burnE) { e.hp = Math.max(0, e.hp - Math.round(burnE.value)); this.text('enemy', `🔥${Math.round(burnE.value)}`, '#ff8a3a', 'dmg'); this.sfxs.push('fire'); this.emit(350); this.checkPhase(); }
+    if (burnE) { e.hp = Math.max(0, e.hp - Math.round(burnE.value)); this.text('enemy', `[[st_burn]]${Math.round(burnE.value)}`, '#ff8a3a', 'dmg'); this.sfxs.push('fire'); this.emit(350); this.checkPhase(); }
     if (e.hp <= 0) { this.win(); return this.flush(); }
 
     this.enemyAct();
     if (p.hp <= 0) { this.lose(); return this.flush(); }
     const burnP = this.pStatus('burn');
     if (burnP) {
-      p.hp = Math.max(0, p.hp - burnP.value); this.text('player', `🔥${burnP.value}`, '#ff8a3a', 'dmg'); this.anim.player = 'hit'; this.emit(350);
+      p.hp = Math.max(0, p.hp - burnP.value); this.text('player', `[[st_burn]]${burnP.value}`, '#ff8a3a', 'dmg'); this.anim.player = 'hit'; this.emit(350);
       if (p.hp <= 0) { this.lose(); return this.flush(); }
     }
     // end of round: durations tick down

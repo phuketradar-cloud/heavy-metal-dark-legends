@@ -8,7 +8,7 @@ import {
   claimTreasure, leaveEvent, leaveReward, nextBattle, resolveEvent, retryBattle, rewardMode, rewardPickCard,
   rewardRemove, rewardTakeGold, rewardUpgrade, statsFor, useGame,
 } from '../game/store';
-import { Backdrop, Embers, PlayerArt, MonsterView } from './art';
+import { Backdrop, Embers, PlayerArt, MonsterView, NODE_IMG } from './art';
 import { Btn, CardView, Ico } from './common';
 import { GearLine } from './Equipment';
 import { BOSSES, ENEMIES } from '../data/enemies';
@@ -114,7 +114,7 @@ export function EventScreen() {
     <div className="screen reward">
       <Backdrop region={region} /><div className="screen-dim" /><Embers n={14} />
       <div className="panel center-panel event">
-        <div className="ev-ico">❓</div>
+        <img className="ev-ico-img" src={`${import.meta.env.BASE_URL}${NODE_IMG.event}`} alt="" draggable={false} />
         <h1>{e.ev.title}</h1>
         <p className="ev-text">{e.ev.text}</p>
         {e.result ? (
@@ -142,7 +142,7 @@ export function TreasureScreen() {
     <div className="screen reward">
       <Backdrop region={region} /><div className="screen-dim" /><Embers n={14} />
       <div className="panel center-panel event">
-        <div className="ev-ico">🧰</div>
+        <img className="ev-ico-img" src={`${import.meta.env.BASE_URL}${NODE_IMG.treasure}`} alt="" draggable={false} />
         <h1>Treasure Chest</h1>
         <p className="ev-text">The lid creaks open, revealing glittering spoils.</p>
         <div className="rw-stats"><span><Ico n="gold" /> +{t.gold} gold</span></div>

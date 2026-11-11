@@ -410,3 +410,7 @@ input[type='range'] { accent-color: #c8182a; width: 220px; }
 .status .uico { margin: 0 2px 0 0; }
 .slot-big .x .uico { width: 18px; height: 18px; margin: 0; }
 .tile-inline { width: 30px; height: 30px; vertical-align: middle; object-fit: contain; }
+.ev-ico-img { width: 120px; height: 120px; object-fit: contain; filter: drop-shadow(0 4px 10px #000); }
+.float .uico { width: 1.1em; height: 1.1em; margin: 0 .05em; vertical-align: -0.15em; }
+.sp-mark .uico { width: 22px; height: 22px; margin: 0; }
+.gear-passive .uico { width: 18px; height: 18px; }

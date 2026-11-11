@@ -13,6 +13,11 @@ export function Stars({ n, of = 3 }: { n: number; of?: number }) {
   return <>{Array.from({ length: of }, (_, i) => <Ico key={i} n={i < n ? 'star' : 'star_off'} />)}</>;
 }
 
+/** Floating combat text; [[icon]] tokens become painted icons. */
+export function FloatText({ text }: { text: string }) {
+  return <>{text.split(/\[\[(\w+)\]\]/).map((part, i) => (i % 2 ? <Ico key={i} n={part} /> : part))}</>;
+}
+
 export function useFitScale(w = 1600, h = 900) {
   const [s, setS] = useState(1);
   useEffect(() => {

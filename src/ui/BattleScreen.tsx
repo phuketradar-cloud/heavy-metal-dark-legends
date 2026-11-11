@@ -11,7 +11,7 @@ import {
   deckInstances, equippedItems, finishBattle, go, partyAssists, setAuto, statsFor, updateSettings, useGame,
 } from '../game/store';
 import { Backdrop, Embers, Icon, MonsterView, PlayerArt, Portrait, TILE_BG, TILE_IMG, TILE_RIM, SKILL_IMG } from './art';
-import { Bar, Btn, Ico, CardView, Particles, StatusRow, type FxHandle } from './common';
+import { Bar, Btn, FloatText, Ico, CardView, Particles, StatusRow, type FxHandle } from './common';
 
 const T = 68, PAD = 16, FRAME_L = 512, FRAME_T = 112;
 const BX = FRAME_L + PAD, BY = FRAME_T + PAD;
@@ -213,7 +213,7 @@ export function BattleScreen() {
         <div className="hud-portrait"><Portrait art={charDef.art} size={104} /><span className="lvl-badge">Lv.{save.chars[charDef.id].level}</span></div>
         <div className="hud-info">
           <div className="hud-name">{charDef.name}</div>
-          <Bar kind="hp" value={p.hp} max={p.maxHp} label={`HP ${p.hp} / ${p.maxHp}${p.shield ? `  (+${p.shield} 🛡)` : ''}`} height={22} shield={p.shield} />
+          <Bar kind="hp" value={p.hp} max={p.maxHp} label={`HP ${p.hp} / ${p.maxHp}${p.shield ? `  (+${p.shield} Shield)` : ''}`} height={22} shield={p.shield} />
           <Bar kind="mp" value={p.mp} max={p.maxMp} label={`MP ${p.mp} / ${p.maxMp}`} height={18} />
           <div className="hud-row">
             <StatusRow list={p.statuses} />
@@ -251,8 +251,8 @@ export function BattleScreen() {
       <div className="hud-enemy">
         <div className="hud-enemy-info">
           <div className="hud-name e">{e.name}<span className="elv">Lv.{e.level}</span></div>
-          <div className="e-type">{enemyDef.type}{e.boss ? ` · ${e.phaseLabel}` : ''}{e.enraged ? ' · 🔥 ENRAGED' : ''}</div>
-          <Bar kind="enemy" value={e.hp} max={e.maxHp} label={`HP ${e.hp} / ${e.maxHp}${e.shield ? `  (+${e.shield} 🛡)` : ''}`} height={24} shield={e.shield} />
+          <div className="e-type">{enemyDef.type}{e.boss ? ` · ${e.phaseLabel}` : ''}{e.enraged ? ' · ENRAGED' : ''}</div>
+          <Bar kind="enemy" value={e.hp} max={e.maxHp} label={`HP ${e.hp} / ${e.maxHp}${e.shield ? `  (+${e.shield} Shield)` : ''}`} height={24} shield={e.shield} />
           <div className="hud-row"><StatusRow list={e.statuses} /></div>
         </div>
         <div className="hud-portrait e"><Portrait art={enemyDef.art} monster size={104} /></div>
@@ -288,7 +288,7 @@ export function BattleScreen() {
                   ? <img className="tile-img" src={`${import.meta.env.BASE_URL}${TILE_IMG[t.type]}`} alt="" draggable={false} />
                   : <Icon id={String(t.type)} size={T - 20} />}
                 {t.special === 1 && <div className={`sp-mark ${t.dir}`}>{t.dir === 'v' ? '⇕' : '⇔'}</div>}
-                {t.special === 2 && <div className="sp-mark star">✦</div>}
+                {t.special === 2 && <div className="sp-mark star"><Ico n="h_perk" /></div>}
               </div>
             </div>
           )))}
@@ -360,7 +360,7 @@ export function BattleScreen() {
       <div className="deck-badge" title="Cards in deck"><Icon id="star" size={26} /><b>{save.deck.length}</b><small>Card Deck</small></div>
 
       {/* floats / fx */}
-      {floats.map((f) => <div key={f.id} className={`float float-${f.kind}`} style={{ left: f.x, top: f.y, color: f.color }}>{f.text}</div>)}
+      {floats.map((f) => <div key={f.id} className={`float float-${f.kind}`} style={{ left: f.x, top: f.y, color: f.color }}><FloatText text={f.text} /></div>)}
       <Particles ref={fx} width={1600} height={900} />
       {flash && <div key={flash.k} className="screen-flash" style={{ background: flash.c }} />}
       {banner && <div key={banner.k} className="big-banner"><span>{banner.t}</span></div>}
