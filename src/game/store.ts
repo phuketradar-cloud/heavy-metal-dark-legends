@@ -7,7 +7,7 @@ import { EVENTS, REGIONS, nodeLevel, type GameEvent, type NodeKind } from '../da
 import type { PlayerStats, Slot } from '../engine/types';
 import type { PartyAssist } from '../engine/battle';
 
-export type Screen = 'menu' | 'character' | 'collection' | 'deck' | 'equipment' | 'map' | 'settings' | 'battle' | 'reward' | 'event' | 'treasure';
+export type Screen = 'menu' | 'character' | 'collection' | 'deck' | 'equipment' | 'map' | 'settings' | 'battle' | 'reward' | 'event' | 'treasure' | 'ending';
 
 export interface Settings { music: boolean; sfx: boolean; musicVol: number; sfxVol: number; speed: number }
 export interface Save {
@@ -22,7 +22,7 @@ export interface BattleCtx { region: number; node: number; kind: NodeKind; enemy
 export interface RewardCtx {
   win: boolean; gold: number; exp: number; levelUps: { name: string; level: number }[]; drops: Equip[];
   cards: string[]; boss: boolean; stars: number; unlocked: string | null; picked: boolean; message: string | null;
-  mode: 'cards' | 'upgrade' | 'remove'; goldAlt: number; region: number;
+  mode: 'cards' | 'upgrade' | 'remove'; goldAlt: number; region: number; final?: boolean;
 }
 export interface EventCtx { region: number; node: number; ev: GameEvent; result: string | null }
 export interface TreasureCtx { region: number; node: number; gold: number; items: Equip[]; card: string | null }
@@ -366,6 +366,7 @@ export function finishBattle(res: BattleResult) {
       const uc = REGIONS[ctx.region].unlocksChar;
       if (uc && !sv.chars[uc].unlocked) { unlockChar(sv, uc); reward.unlocked = uc; }
     }
+    if (boss && ctx.region === REGIONS.length - 1) reward.final = true;
     reward.cards = rollRewardCards(3, boss);
     d.ui.reward = reward; d.ui.screen = 'reward';
   });
@@ -402,7 +403,7 @@ export function rewardRemove(index: number) {
     r.picked = true; r.message = `${CARDS[id].name} removed from your deck.`;
   });
 }
-export function leaveReward() { set((d) => { d.ui.screen = 'map'; d.ui.reward = undefined; d.ui.battle = undefined; }); }
+export function leaveReward() { set((d) => { d.ui.screen = d.ui.reward?.final ? 'ending' : 'map'; d.ui.reward = undefined; d.ui.battle = undefined; }); }
 export function retryBattle() { set((d) => { d.ui.screen = 'battle'; d.ui.reward = undefined; d.ui.auto = false; d.ui.seq++; }); }
 export function nextBattle() {
   const b = state.ui.battle!;

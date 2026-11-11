@@ -9,6 +9,7 @@ import { EquipmentScreen } from './ui/Equipment';
 import { WorldMap } from './ui/MapScreen';
 import { BattleScreen } from './ui/BattleScreen';
 import { EventScreen, RewardScreen, TreasureScreen } from './ui/Reward';
+import { EndingScreen } from './ui/Ending';
 import { Tooltip } from './ui/Tooltip';
 
 export default function App() {
@@ -31,7 +32,7 @@ export default function App() {
   useEffect(() => {
     if (screen === 'menu') audio.track(`${import.meta.env.BASE_URL}audio/mainmenu.mp3`);   // recorded main-title theme
     else if (screen === 'map') audio.music('symphonic');
-    else if (screen === 'reward') audio.music('power');
+    else if (screen === 'reward' || screen === 'ending') audio.music('power');
     else if (screen !== 'battle') audio.music('gothic');
   }, [screen]);
 
@@ -50,6 +51,7 @@ export default function App() {
         {screen === 'battle' && g.ui.battle && <BattleScreen key={g.ui.seq} />}
         {screen === 'reward' && g.ui.reward && g.ui.battle && <RewardScreen />}
         {screen === 'event' && g.ui.event && <EventScreen />}
+        {screen === 'ending' && <EndingScreen />}
         {screen === 'treasure' && g.ui.treasure && <TreasureScreen />}
         {g.ui.toast && <div className="toast">{g.ui.toast}</div>}
       </div>
