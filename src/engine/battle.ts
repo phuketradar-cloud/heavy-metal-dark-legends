@@ -582,6 +582,7 @@ export class Battle {
   private lose() {
     this.s.phase = 'lost';
     this.anim.player = 'defeat'; this.sfxs.push('defeat');
+    if (this.charId === 'warrior') this.sfxs.push('voiceWarriorDefeat');   // one of 4 random voice_warrior_defeat_N.mp3 variants
     this.bannerTxt = 'DEFEAT';
     this.emit(1100);
   }

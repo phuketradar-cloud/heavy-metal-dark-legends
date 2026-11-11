@@ -24,9 +24,10 @@ const SFX_FILES: Record<string, string[]> = {
   ui: ['ui'], ui2: ['ui2'], swap: ['swap'], swapBad: ['swapBad'], match: ['match'], combo: ['combo'], shuffle: ['shuffle'],
   explosion: ['explosion'], hit: ['hit'], crit: ['crit'], fire: ['fire'], lightning: ['lightning'], dark: ['dark'], ultimate: ['ultimate'],
   card: ['card'], heal: ['heal'], shield: ['shield'], buff: ['buff'], dodge: ['dodge'], playerHit: ['playerHit'],
-  roar: ['roar_1', 'roar_2', 'roar_3', 'roar_4'], victory: ['victory'], defeat: ['defeat']
+  roar: ['roar_1', 'roar_2', 'roar_3', 'roar_4'], victory: ['victory'], defeat: ['defeat'],
+  voiceWarriorDefeat: ['voice_warrior_defeat_1', 'voice_warrior_defeat_2', 'voice_warrior_defeat_3', 'voice_warrior_defeat_4']   // optional: the hero's wail when she is defeated
 };
-const NO_JITTER = new Set(['victory', 'defeat', 'ultimate', 'roar']); // everything else gets a tiny random pitch shift
+const NO_JITTER = new Set(['victory', 'defeat', 'ultimate', 'roar', 'voiceWarriorDefeat']); // everything else gets a tiny random pitch shift
 
 const mtof = (m: number) => 440 * Math.pow(2, (m - 69) / 12);
 
