@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { audio } from './engine/audio';
+import { MAP_TRACK, MUSIC_DIR, VICTORY_TRACK } from './data/world';
 import { useGame } from './game/store';
 import { GlobalDefs } from './ui/art';
 import { useFitScale } from './ui/common';
@@ -31,9 +32,8 @@ export default function App() {
   const screen = g.ui.screen;
   useEffect(() => {
     if (screen === 'menu') audio.track(`${import.meta.env.BASE_URL}audio/mainmenu.mp3`);   // recorded main-title theme
-    else if (screen === 'map') audio.music('symphonic');
-    else if (screen === 'reward' || screen === 'ending') audio.music('power');
-    else if (screen !== 'battle') audio.music('gothic');
+    else if (screen === 'reward' || screen === 'ending') audio.track(`${import.meta.env.BASE_URL}${MUSIC_DIR}${VICTORY_TRACK}`);
+    else if (screen !== 'battle') audio.track(`${import.meta.env.BASE_URL}${MUSIC_DIR}${MAP_TRACK}`);   // map + every menu page
   }, [screen]);
 
   return (

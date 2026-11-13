@@ -4,7 +4,7 @@ import { adjacent, findHint, SIZE, type Pos } from '../engine/match3';
 import { audio } from '../engine/audio';
 import { CHARS } from '../data/characters';
 import { CARDS } from '../data/cards';
-import { REGIONS } from '../data/world';
+import { BOSS_TRACK, MUSIC_DIR, REGIONS, REGION_TRACK } from '../data/world';
 import { BOSSES, ENEMIES, MOVES } from '../data/enemies';
 import { RARITY_COLOR, SLOTS, type Anim, type Fx } from '../engine/types';
 import {
@@ -61,7 +61,10 @@ export function BattleScreen() {
   const drag = useRef<{ r: number; c: number; x: number; y: number } | null>(null);
   const result = view.phase === 'won' ? 'won' : view.phase === 'lost' ? 'lost' : null;
 
-  useEffect(() => { alive.current = true; audio.music(ctx.kind === 'boss' ? 'doom' : region.music); return () => { alive.current = false; }; }, [ctx.kind, region.music, g.ui.seq]);
+  useEffect(() => { alive.current = true; {
+    const file = ctx.kind === 'boss' ? BOSS_TRACK : REGION_TRACK[ctx.region];
+    if (file) audio.track(`${import.meta.env.BASE_URL}${MUSIC_DIR}${file}`); else audio.music(region.music);
+  } return () => { alive.current = false; }; }, [ctx.kind, ctx.region, region.music, g.ui.seq]);
   useEffect(() => { const t = setTimeout(() => setBanner(null), 1800); return () => clearTimeout(t); }, []);
 
   const spawnFloat = useCallback((f: Fx, i: number) => {

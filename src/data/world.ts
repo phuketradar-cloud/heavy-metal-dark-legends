@@ -75,3 +75,10 @@ export const EVENTS: GameEvent[] = [
       { id: 'bard-gold', label: 'Pass the hat', hint: 'Gain 120 gold.' },
     ] },
 ];
+
+/** Recorded battle music per region (public/audio/music). null = fall back to the synth style in `music`. */
+export const MUSIC_DIR = 'audio/music/';
+export const REGION_TRACK: (string | null)[] = [
+  'cursed-village.mp3', 'blood-forest.mp3', 'forgotten-cathedral.mp3', null, null, 'demon-citadel.mp3', 'abyss-throne.mp3',
+];
+export const BOSS_TRACK = 'boss.mp3', MAP_TRACK = 'map.mp3', VICTORY_TRACK = 'victory.mp3';
