@@ -419,3 +419,45 @@ input[type='range'] { accent-color: #c8182a; width: 220px; }
 .picked.panel { position: absolute; left: 50%; top: 60%; transform: translate(-50%, -50%); width: 760px; margin: 0 !important; padding: 56px 80px !important; display: flex; flex-direction: column; align-items: center; gap: 8px; box-sizing: border-box; }
 .picked.panel p { margin: 0; font-size: 30px; text-align: center; }
 .picked.panel .row { justify-content: center; margin-top: 18px; }
+
+/* ---- metal HUD: framed portraits + metal lettering ---- */
+.hud-name, .stage-title, .intent-name { font-family: var(--metal) !important; font-weight: 400 !important; letter-spacing: 1.5px; }
+.hud-name { color: #f2e6d2; text-shadow: 0 0 10px #c8182a, 0 2px 0 #000, 0 0 3px #000; font-size: 27px; }
+.stage-title { color: #ffd98a; text-shadow: 0 0 12px #c8182a, 0 2px 0 #000; font-size: 26px; }
+.intent-name { color: #ffe0c8; text-shadow: 0 0 8px #c8182a, 0 2px 0 #000; font-size: 22px; }
+.party-tag { font-family: var(--metal); font-size: 12px; letter-spacing: 2px; color: #e8d8b8; background: linear-gradient(180deg, #000d, #2a1014cc); }
+
+/* round hero / enemy portrait: brushed-steel ring, gold edge lines, rivets, red gem */
+.hud-portrait { border: 0 !important; background: radial-gradient(circle, #1a1020, #05030a) !important; }
+.hud-portrait::after { content: ''; position: absolute; inset: 0; border-radius: 50%; pointer-events: none; z-index: 5;
+  background:
+    radial-gradient(circle at 50% 4px, #ff5a6a 0 2.6px, #6a0a14 3.4px, transparent 4.4px),
+    radial-gradient(circle at 50% calc(100% - 4px), #d8b858 0 2px, transparent 3px),
+    radial-gradient(circle at 4px 50%, #d8b858 0 2px, transparent 3px),
+    radial-gradient(circle at calc(100% - 4px) 50%, #d8b858 0 2px, transparent 3px),
+    conic-gradient(from 20deg, #55555f, #bcbcc8, #484852, #9a9aa6, #3a3a44, #c4c4d0, #55555f);
+  -webkit-mask: radial-gradient(circle, transparent calc(50% - 9px), #000 calc(50% - 8px));
+  mask: radial-gradient(circle, transparent calc(50% - 9px), #000 calc(50% - 8px));
+  box-shadow: inset 0 0 0 1px #000; }
+.hud-portrait::before { content: ''; position: absolute; inset: 0; border-radius: 50%; pointer-events: none; z-index: 6;
+  box-shadow: inset 0 0 0 2px #b8903a, inset 0 0 0 9px #1a1216, inset 0 0 0 10px #b8903a, inset 0 0 14px 10px #000a; }
+.hud-portrait.e::after { background:
+    radial-gradient(circle at 50% 4px, #ff5a6a 0 2.6px, #6a0a14 3.4px, transparent 4.4px),
+    radial-gradient(circle at 50% calc(100% - 4px), #d8b858 0 2px, transparent 3px),
+    radial-gradient(circle at 4px 50%, #d8b858 0 2px, transparent 3px),
+    radial-gradient(circle at calc(100% - 4px) 50%, #d8b858 0 2px, transparent 3px),
+    conic-gradient(from 20deg, #5a4a4a, #c8b4b4, #4a3a3a, #a89090, #3a2a2a, #d0bcbc, #5a4a4a); }
+
+/* assist slots: riveted steel plate with gold edge */
+.party-slot { padding: 7px !important; width: 78px !important; height: 78px !important; border: 0 !important; border-radius: 3px !important;
+  background: linear-gradient(135deg, #5a5a66, #26262e 45%, #4c4c58 70%, #2c2c34) !important;
+  box-shadow: 0 0 0 1px #000, 0 0 0 3px #a8822e, 0 0 0 4px #000, 0 4px 10px #000c, inset 0 0 0 1px #ffffff22 !important; }
+.party-slot::before { content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 4;
+  background:
+    radial-gradient(circle at 5px 5px, #e8cc78 0 1.6px, #6a4a10 2.4px, transparent 3.2px),
+    radial-gradient(circle at calc(100% - 5px) 5px, #e8cc78 0 1.6px, #6a4a10 2.4px, transparent 3.2px),
+    radial-gradient(circle at 5px calc(100% - 5px), #e8cc78 0 1.6px, #6a4a10 2.4px, transparent 3.2px),
+    radial-gradient(circle at calc(100% - 5px) calc(100% - 5px), #e8cc78 0 1.6px, #6a4a10 2.4px, transparent 3.2px); }
+.party-slot .portrait { border-radius: 2px !important; box-shadow: inset 0 0 0 1px #000, inset 0 0 8px #000; }
+.party-slot .party-tag { bottom: 7px; left: 7px; right: 7px; z-index: 5; }
+.party { gap: 12px; }

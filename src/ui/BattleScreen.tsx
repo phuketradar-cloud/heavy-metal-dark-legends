@@ -232,10 +232,10 @@ export function BattleScreen() {
 
       {/* party panel */}
       <div className="party">
-        {unlockedChars.map((c) => (
-          <div key={c.id} className={`party-slot ${c.id === save.activeChar ? 'active' : ''}`} title={c.id === save.activeChar ? 'Leader' : `${c.name} assists with a strike each turn`}>
+        {unlockedChars.filter((c) => c.id !== save.activeChar).map((c) => (
+          <div key={c.id} className="party-slot" title={`${c.name} assists with a strike each turn`}>
             <Portrait art={c.art} size={62} />
-            <span className="party-tag">{c.id === save.activeChar ? 'LEAD' : 'ASSIST'}</span>
+            <span className="party-tag">ASSIST</span>
           </div>
         ))}
       </div>

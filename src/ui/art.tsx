@@ -424,7 +424,7 @@ export function Portrait({ art, monster, size = 80 }: { art: CharArt | MonsterAr
   // zoomed crop of the head area
   const pa = art as CharArt;
   if (pa.img) {
-    const [fx, fy] = pa.face ?? [0.5, 0.12];
+    const [fx, fy] = (pa as CharArt & { eye?: [number, number] }).eye ?? pa.face ?? [0.5, 0.12];
     const zoom = 3.2, asp = pa.imgAspect ?? 0.667;
     const px = (fx * zoom - 0.5) / (zoom - 1) * 100;
     const py = ((fy * zoom / asp) - 0.5) / ((zoom / asp) - 1) * 100;

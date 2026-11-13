@@ -92,7 +92,7 @@ export const ENEMIES: Record<string, EnemyDef> = Object.fromEntries([
 export const BOSSES: Record<string, EnemyDef> = Object.fromEntries([
   {
     id: 'gravekeeper', name: 'The Gravekeeper', type: 'Undead Warrior', boss: true, tagline: 'Warden of the cursed dead',
-    art: { ...H('skull', '#556a44', '#222c1a', '#9aff6a', 'axe', 1), img: 'enemies/gravekeeper.webp', imgAspect: 1000 / 1500, face: [0.47, 0.11] }, hp: 300, atk: 18, def: 8, speed: 9,
+    art: { ...H('skull', '#556a44', '#222c1a', '#9aff6a', 'axe', 1), img: 'enemies/gravekeeper.webp', imgAspect: 1000 / 1500, face: [0.490, 0.125] }, hp: 300, atk: 18, def: 8, speed: 9,
     res: { fire: 1.4, dark: 0.5 }, moves: ['slash', 'smash', 'slash', 'warcry'],
     phases: [
       { at: 1, moves: ['slash', 'smash', 'slash', 'warcry'], label: 'Phase I' },
@@ -102,7 +102,7 @@ export const BOSSES: Record<string, EnemyDef> = Object.fromEntries([
   },
   {
     id: 'bloodDragon', name: 'The Blood Dragon', type: 'Demonic Beast', boss: true, tagline: 'Wyrm of the crimson wood',
-    art: { ...D('#8a1818', '#2a0606', '#ff3a1a'), img: 'enemies/bloodDragon.webp', imgAspect: 1028 / 1125, face: [0.27, 0.15] }, hp: 330, atk: 21, def: 12, speed: 10,
+    art: { ...D('#8a1818', '#2a0606', '#ff3a1a'), img: 'enemies/bloodDragon.webp', imgAspect: 1028 / 1125, face: [0.29, 0.17] }, hp: 330, atk: 21, def: 12, speed: 10,
     res: { phys: 0.7, fire: 0.3, lightning: 1.5 }, moves: ['bite', 'hellfire', 'bite', 'flurry'],
     phases: [
       { at: 1, moves: ['bite', 'hellfire', 'bite', 'pounce'], label: 'Phase I' },
@@ -112,7 +112,7 @@ export const BOSSES: Record<string, EnemyDef> = Object.fromEntries([
   },
   {
     id: 'archbishop', name: 'Archbishop Malakar', type: 'Dark Priest', boss: true, tagline: 'Hymnal of the damned',
-    art: { ...H('hood', '#4a2a6a', '#1a0a2a', '#d85cff', 'staff', 1), img: 'enemies/archbishop.webp', imgAspect: 750 / 1125, face: [0.45, 0.13] }, hp: 340, atk: 23, def: 10, speed: 10,
+    art: { ...H('hood', '#4a2a6a', '#1a0a2a', '#d85cff', 'staff', 1), img: 'enemies/archbishop.webp', imgAspect: 750 / 1125, face: [0.451, 0.173] }, hp: 340, atk: 23, def: 10, speed: 10,
     res: { phys: 1.25, dark: 0.3 }, moves: ['darkBolt', 'curse', 'heal'],
     phases: [
       { at: 1, moves: ['darkBolt', 'curse', 'darkBolt', 'heal'], label: 'Phase I' },
@@ -122,7 +122,7 @@ export const BOSSES: Record<string, EnemyDef> = Object.fromEntries([
   },
   {
     id: 'necromancer', name: 'The Necromancer', type: 'Dark Priest', boss: true, tagline: 'Master of bones',
-    art: { ...H('skull', '#3a3a52', '#12121c', '#6affc8', 'staff', 1), img: 'enemies/necromancer.webp', imgAspect: 750 / 1125, face: [0.55, 0.13] }, hp: 360, atk: 25, def: 12, speed: 10,
+    art: { ...H('skull', '#3a3a52', '#12121c', '#6affc8', 'staff', 1), img: 'enemies/necromancer.webp', imgAspect: 750 / 1125, face: [0.560, 0.173] }, hp: 360, atk: 25, def: 12, speed: 10,
     res: { phys: 1.1, dark: 0.4, fire: 1.2 }, moves: ['summon', 'curse', 'darkBolt', 'heal'],
     phases: [
       { at: 1, moves: ['summon', 'darkBolt', 'curse', 'heal'], label: 'Phase I' },
@@ -132,7 +132,7 @@ export const BOSSES: Record<string, EnemyDef> = Object.fromEntries([
   },
   {
     id: 'demonWarlord', name: 'The Demon Warlord', type: 'Demonic Beast', boss: true, tagline: 'Conqueror of ash',
-    art: { ...H('horned', '#a82a1a', '#3a0c08', '#ffaa2a', 'mace', 1), img: 'enemies/demonWarlord.webp', imgAspect: 1028 / 1125, face: [0.38, 0.17] }, hp: 390, atk: 27, def: 16, speed: 11,
+    art: { ...H('horned', '#a82a1a', '#3a0c08', '#ffaa2a', 'mace', 1), img: 'enemies/demonWarlord.webp', imgAspect: 1028 / 1125, face: [0.381, 0.143] }, hp: 390, atk: 27, def: 16, speed: 11,
     res: { fire: 0.4, lightning: 1.3, phys: 0.9 }, moves: ['smash', 'fireBolt', 'slash', 'warcry'],
     phases: [
       { at: 1, moves: ['slash', 'smash', 'fireBolt', 'warcry'], label: 'Phase I' },
@@ -142,7 +142,7 @@ export const BOSSES: Record<string, EnemyDef> = Object.fromEntries([
   },
   {
     id: 'colossusKing', name: 'Balzagor, Chaos Colossus', type: 'Chaos Monster', boss: true, tagline: 'The citadel incarnate',
-    art: { ...H('demon', '#6a1a5a', '#1c0818', '#ff3aff', 'mace', 1), img: 'enemies/colossusKing.webp', imgAspect: 1040 / 1125, face: [0.4, 0.14] }, hp: 420, atk: 30, def: 20, speed: 10,
+    art: { ...H('demon', '#6a1a5a', '#1c0818', '#ff3aff', 'mace', 1), img: 'enemies/colossusKing.webp', imgAspect: 1040 / 1125, face: [0.412, 0.081] }, hp: 420, atk: 30, def: 20, speed: 10,
     res: { dark: 0.5, lightning: 1.3, phys: 1.1 }, moves: ['smash', 'scramble', 'darkBolt', 'warcry'],
     phases: [
       { at: 1, moves: ['smash', 'scramble', 'darkBolt', 'warcry'], label: 'Phase I' },
@@ -152,7 +152,7 @@ export const BOSSES: Record<string, EnemyDef> = Object.fromEntries([
   },
   {
     id: 'azrael', name: 'METAL LORD AZRAEL', type: 'Metal Lord', boss: true, tagline: 'Sovereign of the Abyss Throne',
-    art: { ...H('crown', '#7a7a92', '#1a1a26', '#ff2a4a', 'sword', 1), img: 'enemies/azrael.webp', imgAspect: 750 / 1125, face: [0.45, 0.07] }, hp: 480, atk: 34, def: 22, speed: 14,
+    art: { ...H('crown', '#7a7a92', '#1a1a26', '#ff2a4a', 'sword', 1), img: 'enemies/azrael.webp', imgAspect: 750 / 1125, face: [0.430, 0.097] }, hp: 480, atk: 34, def: 22, speed: 14,
     res: { dark: 0.6, fire: 0.9, lightning: 1.2 }, moves: ['smash', 'darkBolt', 'chain', 'warcry'],
     phases: [
       { at: 1, moves: ['chain', 'smash', 'darkBolt', 'warcry'], label: 'Phase I' },
@@ -165,26 +165,26 @@ export const BOSSES: Record<string, EnemyDef> = Object.fromEntries([
 
 /** Painted artwork for regular enemies (files in /public/enemies). Entries are merged into each enemy's `art`. */
 export const ENEMY_ART: Record<string, { img: string; imgAspect: number; face: [number, number]; fill?: number; cx?: number; boost?: number }> = {
-  ghoul: { img: 'enemies/ghoul.webp', imgAspect: 721 / 722, face: [0.39, 0.1], fill: 0.327, cx: 0.575 },
-  plagueHound: { img: 'enemies/plagueHound.webp', imgAspect: 1094 / 708, face: [0.15, 0.45], fill: 0.398, cx: 0.468 },
-  cultist: { img: 'enemies/cultist.webp', imgAspect: 687 / 716, face: [0.41, 0.15], fill: 0.523, cx: 0.552 },
-  bloodWolf: { img: 'enemies/bloodWolf.webp', imgAspect: 1166 / 701, face: [0.12, 0.35], fill: 0.446, cx: 0.441 },
-  thornKnight: { img: 'enemies/thornKnight.webp', imgAspect: 787 / 754, face: [0.62, 0.2], fill: 0.523, cx: 0.507 },
-  acolyte: { img: 'enemies/acolyte.webp', imgAspect: 750 / 746, face: [0.43, 0.14], fill: 0.415, cx: 0.478 },
-  paladin: { img: 'enemies/paladin.webp', imgAspect: 547 / 751, face: [0.52, 0.12], fill: 0.544, cx: 0.543 },
-  heretic: { img: 'enemies/heretic.webp', imgAspect: 595 / 736, face: [0.58, 0.1], fill: 0.497, cx: 0.491 },
-  gargoyle: { img: 'enemies/gargoyle.webp', imgAspect: 838 / 738, face: [0.2, 0.45], fill: 0.491, cx: 0.507 },
+  ghoul: { img: 'enemies/ghoul.webp', imgAspect: 721 / 722, face: [0.325, 0.060], fill: 0.327, cx: 0.575 },
+  plagueHound: { img: 'enemies/plagueHound.webp', imgAspect: 1094 / 708, face: [0.119, 0.398], fill: 0.398, cx: 0.468 },
+  cultist: { img: 'enemies/cultist.webp', imgAspect: 687 / 716, face: [0.414, 0.112], fill: 0.523, cx: 0.552 },
+  bloodWolf: { img: 'enemies/bloodWolf.webp', imgAspect: 1166 / 701, face: [0.078, 0.295], fill: 0.446, cx: 0.441 },
+  thornKnight: { img: 'enemies/thornKnight.webp', imgAspect: 787 / 754, face: [0.620, 0.224], fill: 0.523, cx: 0.507 },
+  acolyte: { img: 'enemies/acolyte.webp', imgAspect: 750 / 746, face: [0.388, 0.117], fill: 0.415, cx: 0.478 },
+  paladin: { img: 'enemies/paladin.webp', imgAspect: 547 / 751, face: [0.458, 0.111], fill: 0.544, cx: 0.543 },
+  heretic: { img: 'enemies/heretic.webp', imgAspect: 595 / 736, face: [0.568, 0.087], fill: 0.497, cx: 0.491 },
+  gargoyle: { img: 'enemies/gargoyle.webp', imgAspect: 838 / 738, face: [0.188, 0.443], fill: 0.491, cx: 0.507 },
   cryptKnight: { img: 'enemies/cryptKnight.webp', imgAspect: 862 / 742, face: [0.57, 0.21], fill: 0.327, cx: 0.603 },
-  wight: { img: 'enemies/wight.webp', imgAspect: 678 / 740, face: [0.42, 0.14], fill: 0.476, cx: 0.556 },
-  ritualist: { img: 'enemies/ritualist.webp', imgAspect: 790 / 748, face: [0.51, 0.21], fill: 0.424, cx: 0.594 },
-  magmaHound: { img: 'enemies/magmaHound.webp', imgAspect: 1000 / 733, face: [0.14, 0.5], fill: 0.509, cx: 0.481 },
-  ashWalker: { img: 'enemies/ashWalker.webp', imgAspect: 865 / 743, face: [0.44, 0.21], fill: 0.438, cx: 0.582 },
-  spawn: { img: 'enemies/spawn.webp', imgAspect: 840 / 703, face: [0.27, 0.16], fill: 0.498, cx: 0.527 },
-  citadelGuard: { img: 'enemies/citadelGuard.webp', imgAspect: 774 / 758, face: [0.53, 0.17], fill: 0.587, cx: 0.47 },
-  hellPriest: { img: 'enemies/hellPriest.webp', imgAspect: 839 / 763, face: [0.52, 0.18], fill: 0.379, cx: 0.517 },
-  colossus: { img: 'enemies/colossus.webp', imgAspect: 1008 / 763, face: [0.4, 0.24], fill: 0.492, cx: 0.509 },
-  voidKnight: { img: 'enemies/voidKnight.webp', imgAspect: 678 / 762, face: [0.56, 0.14], fill: 0.347, cx: 0.621 },
-  abyssBeast: { img: 'enemies/abyssBeast.webp', imgAspect: 1198 / 717, face: [0.09, 0.38], fill: 0.413, cx: 0.451 },
-  vanguard: { img: 'enemies/vanguard.webp', imgAspect: 1092 / 752, face: [0.45, 0.13], fill: 0.411, cx: 0.521, boost: 1.6 },
+  wight: { img: 'enemies/wight.webp', imgAspect: 678 / 740, face: [0.385, 0.125], fill: 0.476, cx: 0.556 },
+  ritualist: { img: 'enemies/ritualist.webp', imgAspect: 790 / 748, face: [0.510, 0.181], fill: 0.424, cx: 0.594 },
+  magmaHound: { img: 'enemies/magmaHound.webp', imgAspect: 1000 / 733, face: [0.140, 0.469], fill: 0.509, cx: 0.481 },
+  ashWalker: { img: 'enemies/ashWalker.webp', imgAspect: 865 / 743, face: [0.380, 0.174], fill: 0.438, cx: 0.582 },
+  spawn: { img: 'enemies/spawn.webp', imgAspect: 840 / 703, face: [0.249, 0.155], fill: 0.498, cx: 0.527 },
+  citadelGuard: { img: 'enemies/citadelGuard.webp', imgAspect: 774 / 758, face: [0.530, 0.202], fill: 0.587, cx: 0.47 },
+  hellPriest: { img: 'enemies/hellPriest.webp', imgAspect: 839 / 763, face: [0.458, 0.196], fill: 0.379, cx: 0.517 },
+  colossus: { img: 'enemies/colossus.webp', imgAspect: 1008 / 763, face: [0.317, 0.240], fill: 0.492, cx: 0.509 },
+  voidKnight: { img: 'enemies/voidKnight.webp', imgAspect: 678 / 762, face: [0.560, 0.162], fill: 0.347, cx: 0.621 },
+  abyssBeast: { img: 'enemies/abyssBeast.webp', imgAspect: 1198 / 717, face: [0.036, 0.390], fill: 0.413, cx: 0.451 },
+  vanguard: { img: 'enemies/vanguard.webp', imgAspect: 1092 / 752, face: [0.427, 0.122], fill: 0.411, cx: 0.521, boost: 1.6 },
 };
 Object.entries(ENEMY_ART).forEach(([id, a]) => { if (ENEMIES[id]) Object.assign(ENEMIES[id].art, a); });

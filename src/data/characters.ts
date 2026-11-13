@@ -15,7 +15,7 @@ export interface CharArt {
   skin: string; armor1: string; armor2: string; accent: string; cape: string; hair: string;
   head: 'hair' | 'helm' | 'hood' | 'horns' | 'mohawk'; weapon: 'sword' | 'greatsword' | 'staff' | 'guitar' | 'axe'; glow: string;
   /** optional painted full-body artwork in /public (falls back to the SVG figure when absent) */
-  img?: string; imgAspect?: number; face?: [number, number];
+  img?: string; imgAspect?: number; face?: [number, number]; eye?: [number, number];
 }
 
 export interface CharDef {
@@ -46,7 +46,7 @@ export const CHAR_LIST: CharDef[] = [
       { level: 18, name: 'Unbroken', desc: '+12 starting shield', mod: { startShield: 12 } },
       { level: 26, name: 'Metal God', desc: '+10% ATK, +1 Energy', mod: { atk: 10, energy: 1 } },
     ],
-    art: { skin: '#e2b9a0', armor1: '#2b2b36', armor2: '#8a8aa0', accent: '#d12f3a', cape: '#7a0f1f', hair: '#1a1020', head: 'hair', weapon: 'sword', glow: '#ff3a4a', img: 'chars/warrior.webp', imgAspect: 1024 / 1536, face: [0.52, 0.105] },
+    art: { skin: '#e2b9a0', armor1: '#2b2b36', armor2: '#8a8aa0', accent: '#d12f3a', cape: '#7a0f1f', hair: '#1a1020', head: 'hair', weapon: 'sword', glow: '#ff3a4a', img: 'chars/warrior.webp', imgAspect: 1024 / 1536, face: [0.52, 0.105], eye: [0.633, 0.073] },
     unlock: 'Starting hero',
     startDeck: [...BASE_DECK, 'thunderStrike', 'ironWall', 'bloodSlash', 'rageGuitar'].slice(0, 12),
   },
@@ -64,7 +64,7 @@ export const CHAR_LIST: CharDef[] = [
       { level: 20, name: 'Reaper Might', desc: '+12% ATK', mod: { atk: 12 } },
       { level: 28, name: 'Eternal Vigil', desc: '+15 starting shield, +1 Energy', mod: { startShield: 15, energy: 1 } },
     ],
-    art: { skin: '#9aa0b0', armor1: '#15151c', armor2: '#5a5f78', accent: '#6dd3ff', cape: '#1d2236', hair: '#000', head: 'helm', weapon: 'greatsword', glow: '#5ac8ff', img: 'chars/deathKnight.webp', imgAspect: 1024 / 1536, face: [0.58, 0.115] },
+    art: { skin: '#9aa0b0', armor1: '#15151c', armor2: '#5a5f78', accent: '#6dd3ff', cape: '#1d2236', hair: '#000', head: 'helm', weapon: 'greatsword', glow: '#5ac8ff', img: 'chars/deathKnight.webp', imgAspect: 1024 / 1536, face: [0.58, 0.115], eye: [0.55, 0.117] },
     unlock: 'Defeat the boss of The Cursed Village',
     startDeck: [...BASE_DECK, 'ironWall', 'counterAttack', 'bloodSlash', 'ironWall'].slice(0, 12),
   },
@@ -82,7 +82,7 @@ export const CHAR_LIST: CharDef[] = [
       { level: 20, name: 'Soul Siphon', desc: '+5% lifesteal', mod: { lifesteal: 5 } },
       { level: 28, name: 'Abyssal Choir', desc: '+15% MAG, +1 Energy', mod: { mag: 15, energy: 1 } },
     ],
-    art: { skin: '#cdb7d6', armor1: '#1c1028', armor2: '#6a3a98', accent: '#c45cff', cape: '#2a0f3f', hair: '#e8e0f0', head: 'hood', weapon: 'staff', glow: '#b05cff', img: 'chars/darkPriest.webp', imgAspect: 1000 / 1500, face: [0.56, 0.115] },
+    art: { skin: '#cdb7d6', armor1: '#1c1028', armor2: '#6a3a98', accent: '#c45cff', cape: '#2a0f3f', hair: '#e8e0f0', head: 'hood', weapon: 'staff', glow: '#b05cff', img: 'chars/darkPriest.webp', imgAspect: 1000 / 1500, face: [0.56, 0.115], eye: [0.605, 0.17] },
     unlock: 'Defeat the boss of The Blood Forest',
     startDeck: [...BASE_DECK, 'soulDrain', 'holyBlessing', 'soulDrain', 'darkBarrier'].slice(0, 12),
   },
@@ -100,7 +100,7 @@ export const CHAR_LIST: CharDef[] = [
       { level: 22, name: 'Wall of Sound', desc: '+15 starting shield, +30 MP', mod: { startShield: 15, mp: 30 } },
       { level: 30, name: 'Solo of Legends', desc: '+10% ATK/MAG, +1 Energy', mod: { atk: 10, mag: 10, energy: 1 } },
     ],
-    art: { skin: '#e8c4a8', armor1: '#231226', armor2: '#8b2436', accent: '#ffb02e', cape: '#3a0f2a', hair: '#ff5a2a', head: 'mohawk', weapon: 'guitar', glow: '#ffa22e', img: 'chars/guitarist.webp', imgAspect: 1024 / 1536, face: [0.5, 0.1] },
+    art: { skin: '#e8c4a8', armor1: '#231226', armor2: '#8b2436', accent: '#ffb02e', cape: '#3a0f2a', hair: '#ff5a2a', head: 'mohawk', weapon: 'guitar', glow: '#ffa22e', img: 'chars/guitarist.webp', imgAspect: 1024 / 1536, face: [0.5, 0.1], eye: [0.53, 0.087] },
     unlock: 'Defeat the boss of The Forgotten Cathedral',
     startDeck: [...BASE_DECK, 'rageGuitar', 'comboAmplifier', 'thunderStrike', 'rageGuitar'].slice(0, 12),
   },
@@ -118,7 +118,7 @@ export const CHAR_LIST: CharDef[] = [
       { level: 23, name: 'Unstoppable', desc: '+10% HP, +10% ATK', mod: { hp: 10, atk: 10 } },
       { level: 32, name: 'Ragnarok', desc: '+15% ATK, +1 Energy', mod: { atk: 15, energy: 1 } },
     ],
-    art: { skin: '#d9a98c', armor1: '#3a1410', armor2: '#9a3a22', accent: '#ff8a1e', cape: '#4a0c0c', hair: '#8a1010', head: 'horns', weapon: 'axe', glow: '#ff5a1e', img: 'chars/berserker.webp', imgAspect: 750 / 1125, face: [0.64, 0.105] },
+    art: { skin: '#d9a98c', armor1: '#3a1410', armor2: '#9a3a22', accent: '#ff8a1e', cape: '#4a0c0c', hair: '#8a1010', head: 'horns', weapon: 'axe', glow: '#ff5a1e', img: 'chars/berserker.webp', imgAspect: 750 / 1125, face: [0.64, 0.105], eye: [0.64, 0.15] },
     unlock: 'Defeat the boss of The Necromancer Crypt',
     startDeck: [...BASE_DECK, 'berserkerSoul', 'bloodSlash', 'rageGuitar', 'bloodSlash'].slice(0, 12),
   },
