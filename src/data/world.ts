@@ -79,6 +79,6 @@ export const EVENTS: GameEvent[] = [
 /** Recorded battle music per region (public/audio/music). null = fall back to the synth style in `music`. */
 export const MUSIC_DIR = 'audio/music/';
 export const REGION_TRACK: (string | null)[] = [
-  'cursed-village.mp3', 'blood-forest.mp3', 'forgotten-cathedral.mp3', null, null, 'demon-citadel.mp3', 'abyss-throne.mp3',
+  'cursed-village.mp3', 'blood-forest.mp3', 'forgotten-cathedral.mp3', 'necromancer-crypt.mp3', 'burning-wasteland.mp3', 'demon-citadel.mp3', 'abyss-throne.mp3',
 ];
 export const BOSS_TRACK = 'boss.mp3', MAP_TRACK = 'map.mp3', VICTORY_TRACK = 'victory.mp3';
